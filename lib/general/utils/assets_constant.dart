@@ -6,4 +6,5 @@ class Assets {
 
   static const String navHome = '$_iconPath/onboardone.svg';
   static const String onboard = '$_imagePath/login.png';
+  static const String bgImage = '$_imagePath/background_image.png';
 }
