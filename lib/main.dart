@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp/general/configs/routes.dart';
+import 'package:todoapp/general/utils/color_constant.dart';
 
 import 'general/widgets/my_scroll_behaviour.dart';
 import 'screens/onboarding/views/onborading.dart';
@@ -42,12 +44,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'TodoApp',
         theme: ThemeData(
-          // scaffoldBackgroundColor: AppConst.kBlack,
-          // textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
-          //     .apply(fontSizeFactor: 1.sp),
+          scaffoldBackgroundColor: AppConst.kBlack,
+          textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
+              .apply(fontSizeFactor: 1.sp),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          // colorScheme: ColorScheme.fromSeed(
-          //     seedColor: const Color.fromARGB(199, 23, 211, 61)),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(199, 23, 211, 61)),
         ),
         builder: (context, widget) {
           SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

@@ -14,15 +14,19 @@ class PageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // height: AppConst.kHeight,
-        // width: AppConst.kWidth,
-        color: AppConst.kPrimary,
+        height: AppConst.kHeight,
+        width: AppConst.kWidth,
+        color: AppConst.kBackground,
+        // color: AppConst.kPrimary,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40.w),
-              child: Image.asset(Assets.onboard),
+              child: Image.asset(
+                Assets.onboard,
+              ),
             ),
             // Align(
             //   alignment: Alignment.center,
@@ -30,14 +34,14 @@ class PageOne extends StatelessWidget {
             // ),
             Padding(
               padding: EdgeInsets.only(top: 63.h),
-              child: ListView(
+              child: Column(
                 children: [
                   Padding(
                       padding: EdgeInsets.only(top: 63.h),
                       child: CustomText(
                         data: 'Orgnaise Your Time',
                         textAlign: TextAlign.center,
-                        color: AppConst.kWhite,
+                        color: AppConst.kBlack,
                         fontSize: 24.sp,
                         height: 1.3.h,
                         fontWeight: FontWeight.w700,
@@ -53,7 +57,7 @@ class PageOne extends StatelessWidget {
                         letterSpacing: 2.2.h,
                         height: 1.2.h,
                         fontWeight: FontWeight.w500,
-                        color: AppConst.kWhite,
+                        color: AppConst.kBlack,
                         textAlign: TextAlign.center,
                       ),
                     ),

@@ -41,14 +41,14 @@ class _OnboardingState extends State<Onboarding> {
               PageTwo(),
             ],
           ),
-
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 3.h),
+              padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 30.w),
               child: SizedBox(
                 height: 40.h,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SecondaryButton(
                       onPressed: () {
@@ -59,9 +59,12 @@ class _OnboardingState extends State<Onboarding> {
                       child: Row(
                         children: [
                           Icon(Ionicons.chevron_forward_circle,
-                              size: 30.h, color: AppConst.kBlack),
+                              size: 30.h, color: AppConst.kPrimary),
                           const CustomText(
-                              data: 'Skip', textAlign: TextAlign.start),
+                            data: 'Skip',
+                            textAlign: TextAlign.start,
+                            color: AppConst.kPrimary,
+                          ),
                         ],
                       ),
                     ),
@@ -69,75 +72,22 @@ class _OnboardingState extends State<Onboarding> {
                       onTap: () {
                         pageController.nextPage(
                             duration: const Duration(milliseconds: 600),
-                            curve: Curves.easeInCirc);
+                            curve: Curves.ease);
                       },
                       child: SmoothPageIndicator(
                           controller: pageController,
-                          count: 3,
+                          count: 2,
                           effect: ExpandingDotsEffect(
                               dotHeight: 6.h,
                               dotWidth: 6.h,
-                              dotColor: AppConst.kWhite,
-                              activeDotColor: AppConst.kWhite)),
+                              activeDotColor: AppConst.kBlack,
+                              dotColor: AppConst.kWhite)),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(vertical: 65.w, horizontal: 30.h),
-          //     child: Container(
-          //       height: 40.h,
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           Expanded(
-          //             child: SecondaryButton(
-          //                 onPressed: () {
-          //                   Navigator.pushNamed(context, SignUpOpt.route);
-          //                 },
-          //                 hasUnderline: true,
-          //                 child: CustomText(
-          //                   data: '',
-          //                   textAlign: TextAlign.center,
-          //                   fontSize: 16.sp,
-          //                   fontWeight: FontWeight.w700,
-          //                   color: kWhite,
-          //                 )),
-          //           ),
-          //           Expanded(child: hSpace()),
-          //           PrimaryButton(
-          //             onPressed: () {
-
-          //               pageController.nextPage(
-          //                   duration: Duration(milliseconds: 600),
-          //                   curve: Curves.easeInCirc);
-          //             },
-          //             hasOuterPadding: false,
-          //             backgroundColor: kWhite.withAlpha(1),
-          //             padding:
-          //                 EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
-          //             child: Row(
-          //               children: [
-          //                 CustomText(
-          //                   data: 'Next',
-          //                   textAlign: TextAlign.center,
-          //                   fontSize: 16.sp,
-          //                   fontWeight: FontWeight.w700,
-          //                   color: kWhite,
-          //                 ),
-          //                 SvgPicture.asset(Assets.arrowIcon)
-          //               ],
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
