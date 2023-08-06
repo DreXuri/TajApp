@@ -120,7 +120,7 @@ class _HomepageState extends ConsumerState<Homepage>
                     size: 20.h, color: AppConst.kPrimary),
                 WidthSpace(10.w),
                 CustomText(
-                  data: '''Today's Text''',
+                  data: '''Today's Task''',
                   textAlign: TextAlign.center,
                   color: AppConst.kBlack,
                   fontSize: 15.sp,
@@ -158,7 +158,7 @@ class _HomepageState extends ConsumerState<Homepage>
                       // child: ,
                     ),
                     Container(
-                      color: AppConst.kPrimary,
+                      color: AppConst.kSecondaryYellow,
                       height: AppConst.kHeight * 0.3,
                       // child: ,
                     ),
@@ -174,7 +174,7 @@ class _HomepageState extends ConsumerState<Homepage>
             ),
             HeightSpace(hight: 17.h),
             const ExpandWidget(
-              text: '''Tomorrow's Task''',
+              text: '''Today's Task''',
               subText: '''Tomorrow's Task are''',
               children: [],
             )

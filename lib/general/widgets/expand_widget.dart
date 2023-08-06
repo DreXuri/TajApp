@@ -22,7 +22,7 @@ class ExpandWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppConst.kBlack,
         borderRadius: BorderRadius.all(Radius.circular(10.r)),
-       ),
+      ),
       child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
