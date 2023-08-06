@@ -6,6 +6,7 @@ import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/background_widget.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
+import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
 
@@ -165,9 +166,18 @@ class _HomepageState extends ConsumerState<Homepage>
                 ),
               ),
             ),
-         
-         
-         
+            const HeightSpace(),
+            const ExpandWidget(
+              text: '''Tomorrow's Task''',
+              subText: '''Tomorrow's Task are''',
+              children: [],
+            ),
+            HeightSpace(hight: 17.h),
+            const ExpandWidget(
+              text: '''Tomorrow's Task''',
+              subText: '''Tomorrow's Task are''',
+              children: [],
+            )
           ],
         ),
       ),
