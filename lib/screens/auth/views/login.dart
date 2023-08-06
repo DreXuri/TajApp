@@ -3,12 +3,24 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todoapp/general/params/params.dart';
+import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
+import 'package:todoapp/general/widgets/app_bar.dart';
+import 'package:todoapp/general/widgets/button.dart';
+import 'package:todoapp/general/widgets/custom_snackbar.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/inputs.dart';
+import 'package:todoapp/screens/auth/controllers/registration/registration_controller.dart';
+import 'package:todoapp/screens/auth/views/otp_phone.dart';
+import 'package:todoapp/screens/auth/widgets/phone_number_field.dart';
+import 'package:todoapp/screens/home/views/homepage.dart';
+
+import '../../../general/widgets/custom_loading_indicator.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -20,203 +32,168 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   bool _passwordShow = false;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
+    _textController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConst.kBlack,
-      // appBar: PreferredSize(
-      //     preferredSize: Size.fromHeight(200.h),
-      //     child: const CustomText(data: 'Login', textAlign: TextAlign.center)),
-      body: SafeArea(
-        // height: MediaQuery.sizeOf(context).height,
-        // height: AppConst.kHeigh,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Form(
-                  key: _loginFormKey,
-                  child: Container(
-                    height: 618,
-                    decoration: BoxDecoration(
-                        color: AppConst.kWhite,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.r),
-                          topRight: Radius.circular(10.r),
-                        )),
+      appBar: customAppBar(
+        context,
+        hasLeading: false,
+        leading: null,
+        backgroundColor: AppConst.kWhite,
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+          Assets.onboard,
+          width: 93.w,
+          height: 106.12.h,
+        ),
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.w),
+            child: Image.asset(
+              Assets.bgImage,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Form(
+                    key: _loginFormKey,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        HeightSpace(hight: 103.h),
                         Padding(
-                          padding: EdgeInsets.only(
-                            top: 16.0.h,
-                            left: 30,
-                            right: 30,
-                            bottom: 8.h,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: PhoneNumberField(
+                            controller: _textController,
                           ),
-                          child: CustomText(
-                            data: 'Email / Phone Number ',
-                            textAlign: TextAlign.start,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.w,
-                            height: 1.2.h,
-                          ),
+                        ),
+                        HeightSpace(hight: 22.h),
+                        PrimaryButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Homepage.route);
+                          },
+                          text: 'Get code',
                         ),
                         const HeightSpace(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: InputWidget(
-                            hasLabel: false,
-                            hintText: 'enter your email/ phone number',
-                            controller: _usernameController,
-                            validator: (p0) =>
-                                InputValidator.validateEmpty(value: p0!),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0, left: 30),
-                          child: CustomText(
-                            data: 'Password ',
-                            textAlign: TextAlign.start,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.w,
-                            height: 1.2.h,
-                          ),
-                        ),
-                        const HeightSpace(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: InputWidget(
-                            hasLabel: false,
-                            hintText: 'Password',
-                            controller: _passwordController,
-                            obscureText: !_passwordShow,
-                            validator: (p0) =>
-                                InputValidator.validateEmpty(value: p0!),
-                            suffixIcon: IconButton(
-                              color: AppConst.kLightGray,
-                              icon: Icon(
-                                _passwordShow
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordShow = !_passwordShow;
-                                });
+                        Consumer(
+                          builder: (_, WidgetRef ref, Widget? child) {
+                            final state = ref.watch(regControllerProvider);
+
+                            ref.listen(
+                              regControllerProvider,
+                              (previous, next) {
+                                next.when(
+                                  initial: () => null,
+                                  loading: () => null,
+                                  loaded: () => _onWidgetDidBuild(
+                                      context, OtpPhoneScreen.route),
+                                  error: (message) => _showSnackBar(
+                                      context, message,
+                                      isError: true),
+                                );
                               },
-                            ),
-                          ),
+                            );
+
+                            return state.when(
+                              initial: () => _continueButton(ref),
+                              loading: () => const CustomLoadingIndicator(),
+                              loaded: () => _continueButton(ref),
+                              error: (value) => _continueButton(ref),
+                            );
+                          },
                         ),
-                        HeightSpace(hight: 32.h),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: TextButton(
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => const ResetPassword(),
-                                //   ),
-                                // );
-                              },
-                              child: CustomText(
-                                data: 'I forgot my password? ',
-                                textAlign: TextAlign.start,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                                color: AppConst.kSecondaryYellow,
-                                letterSpacing: 1.w,
-                                height: 1.2.h,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(30),
-                            child: RichText(
-                              text: TextSpan(
-                                text: 'Don\'t have an account?',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: '  Create account',
-                                    style: const TextStyle(
-                                      color: AppConst.kSecondaryYellow,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         const SignUpOpt(),
-                                        //   ),
-                                        // );
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
+                        HeightSpace(hight: 149.h),
                       ],
                     ),
-                  )),
-            ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 
-  // Widget _loginButton(WidgetRef ref) {
-  //   return PrimaryButton(
-  //     text: 'Login',
-  //     onPressed: () {
-  //       if (_loginFormKey.currentState!.validate()) {
-  //         ref.read(loginControllerProvider.notifier).login(
-  //               RegistrationParams(
-  //                 email: '',
-  //                 phone: '',
-  //                 otp: '',
-  //                 firstname: '',
-  //                 lastname: '',
-  //                 password: _passwordController.text.trim(),
-  //                 role: '',
-  //                 username: _usernameController.text.trim(),
-  //               ),
-  //             );
+  Widget _continueButton(
+    WidgetRef ref,
+  ) {
+    return PrimaryButton(
+      onPressed: () {
+        if (_loginFormKey.currentState!.validate()) {
+          ref.read(regControllerProvider.notifier).registerPhone(
+                RegistrationParams(
+                  email: '',
+                  phone:
+                      '${InputValidator.kCountryCode}${_textController.text}',
+                  verificationCode: '',
+                  firstName: '',
+                  lastName: '',
+                  password: '',
+                ),
+              );
 
-  //         hideKeyboard(context);
-  //       }
-  //     },
-  //   );
-  // }
+          hideKeyboard(context);
+        }
+      },
+      text: 'GetCode',
+      backgroundColor: AppConst.kSecondaryYellow,
+      borderColor: AppConst.kWhite,
+      // child: const CustomText(
+      //   fontSize: 16,
+      //   fontWeight: FontWeight.w400,
+      //   height: 1.3,
+      //   data: 'Get Code',
+      //   color: AppConst.kWhite,
+      //   textAlign: null,
+      // ),
+    );
+  }
 
   void _onWidgetDidBuild(BuildContext buildContext, String routeName) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(buildContext).pushReplacementNamed(routeName);
+      Navigator.of(buildContext).pushReplacementNamed(
+        routeName,
+        arguments: {
+          'phoneNumber':
+              '${InputValidator.kCountryCode}${_textController.text}',
+        },
+      );
     });
   }
+
+  void _showSnackBar(BuildContext context, String content,
+      {bool isError = false}) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        showCustomSnackBar(context, content, isError: isError);
+      },
+    );
+  }
+
+  void hideKeyboard(BuildContext context) {
+    FocusScope.of(context).unfocus();
+  }
+}
+
+void _onWidgetDidBuild(BuildContext buildContext, String routeName) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    Navigator.of(buildContext).pushReplacementNamed(routeName);
+  });
 }

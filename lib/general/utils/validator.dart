@@ -1,6 +1,9 @@
 class InputValidator {
   InputValidator._();
+ 
 
+   static String kCountryCode = '+234';
+   
   static String? noValidate({required String value}) {
     return null;
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';

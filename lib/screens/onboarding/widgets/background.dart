@@ -21,3 +21,11 @@
 //     );
 //   }
 // }
+
+  import 'package:flutter/material.dart';
+import 'package:todoapp/general/utils/assets_constant.dart';
+
+BoxDecoration bachgroundWiget() {
+    return const BoxDecoration(
+          image: DecorationImage(image: AssetImage(Assets.bgImage)));
+  }

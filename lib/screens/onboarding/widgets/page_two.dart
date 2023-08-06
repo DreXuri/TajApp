@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/button.dart';
-import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
+import 'package:todoapp/screens/onboarding/widgets/background.dart';
 
 class PageTwo extends StatelessWidget {
   static const String route = '/onboard_one_screen';
@@ -17,7 +17,7 @@ class PageTwo extends StatelessWidget {
       body: Container(
         height: AppConst.kHeight,
         width: AppConst.kWidth,
-        // color: AppConst.kPrimary,
+        decoration: bachgroundWiget(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +74,7 @@ class PageTwo extends StatelessWidget {
                   );
                 },
                 hasOuterPadding: true,
-                text: 'Login with ypur email',
+                text: 'Login with your Phone number',
                 borderColor: AppConst.kWhite,
               ),
             )

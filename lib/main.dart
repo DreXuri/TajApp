@@ -44,12 +44,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'TodoApp',
         theme: ThemeData(
-          scaffoldBackgroundColor: AppConst.kBlack,
+          // scaffoldBackgroundColor: AppConst.kBlack,
           textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
               .apply(fontSizeFactor: 1.sp),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(199, 23, 211, 61)),
+          // colorScheme: ColorScheme.fromSeed(
+          //     seedColor: const Color.fromARGB(199, 23, 211, 61)),
         ),
         builder: (context, widget) {
           SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

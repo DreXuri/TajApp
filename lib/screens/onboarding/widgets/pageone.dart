@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
+import 'package:todoapp/screens/onboarding/widgets/background.dart';
 
 class PageOne extends StatelessWidget {
   static const String route = '/onboard_one_screen';
@@ -16,8 +16,7 @@ class PageOne extends StatelessWidget {
       body: Container(
         height: AppConst.kHeight,
         width: AppConst.kWidth,
-        color: AppConst.kBackground,
-        // color: AppConst.kPrimary,
+        decoration: bachgroundWiget(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,4 +69,5 @@ class PageOne extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -23,7 +23,8 @@ class AppConst {
   static const Color kPrimaryBlue = Color(0x7E22A1E6);
   static const Color kPrimaryGreen = Color(0xFF89C348);
   static const Color kDisabledGray = Color(0xFF374B58);
-  static const Color kBorderColor = Color(0xFF0E0D0D);
+  static const Color kBorderColor = Color(0xFF074039);
+  // static const Color kBorderColor = Color(0xFF0E0D0D);
   static const Color kLightGray = Color(0xFFCCCCCC);
   static const Color kInputFillColor = Color(0xFFFFFFFF);
   static const Color kButtonColor = Color(0xFF074039);
