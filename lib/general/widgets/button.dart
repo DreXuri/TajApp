@@ -284,7 +284,7 @@ class ButtonWithIcon extends StatelessWidget {
                 color: textColor ?? AppConst.kTextBlack,
                 textAlign: TextAlign.center,
               ),
-              WidthSpace(spacing ?? 6.w),
+              const WidthSpace(),
               icon
             ],
           ),

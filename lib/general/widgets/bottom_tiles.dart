@@ -38,7 +38,7 @@ class BottomTitles extends StatelessWidget {
                 // child: widget.color,
               },
             ),
-            WidthSpace(10.w),
+            const WidthSpace(),
             Padding(
               padding: EdgeInsets.all(10.w),
               child: Column(

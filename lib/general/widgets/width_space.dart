@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidthSpace extends StatelessWidget {
   final double? width;
-  const WidthSpace(double w, {
+  const WidthSpace( {
     super.key,
     this.width,
   });
@@ -11,7 +11,7 @@ class WidthSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     width: width ?? 20.h,
+     width: width ?? 10.h,
     );
   }
 }

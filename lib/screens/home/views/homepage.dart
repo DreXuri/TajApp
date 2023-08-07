@@ -9,6 +9,7 @@ import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
+import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
 
 import '../../../general/widgets/search_field.dart';
 
@@ -118,7 +119,7 @@ class _HomepageState extends ConsumerState<Homepage>
               children: [
                 Icon(Ionicons.alarm_sharp,
                     size: 20.h, color: AppConst.kPrimary),
-                WidthSpace(10.w),
+                const WidthSpace(),
                 CustomText(
                   data: '''Today's Task''',
                   textAlign: TextAlign.center,
@@ -155,7 +156,16 @@ class _HomepageState extends ConsumerState<Homepage>
                     Container(
                       color: AppConst.kBlack,
                       height: AppConst.kHeight * 0.3,
-                      // child: ,
+                      child: ListView(
+                        children: [
+                          PlanTiles(
+                            start: '04: 45',
+                            end: '06:33',
+                            switcher:
+                                Switch(value: true, onChanged: (value) {}),
+                          ),
+                        ],
+                      ),
                     ),
                     Container(
                       color: AppConst.kSecondaryYellow,
@@ -170,12 +180,18 @@ class _HomepageState extends ConsumerState<Homepage>
             const ExpandWidget(
               text: '''Tomorrow's Task''',
               subText: '''Tomorrow's Task are''',
+              trailing: Icon(Ionicons.time_outline),
               children: [],
             ),
             HeightSpace(hight: 17.h),
-            const ExpandWidget(
-              text: '''Today's Task''',
-              subText: '''Tomorrow's Task are''',
+            ExpandWidget(
+              text: DateTime.now()
+                  .add(Duration(days: 2))
+                  .toString()
+                  .substring(5, 10),
+              subText: '''Task for future''',
+              trailing: Icon(Ionicons.time_outline),
+              //  trailing: Icon(Ionicons.alarm_sharp),
               children: [],
             )
           ],
