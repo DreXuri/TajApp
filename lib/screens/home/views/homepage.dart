@@ -9,6 +9,7 @@ import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
+import 'package:todoapp/screens/home/cobtrollers/expandsion%20controller/expansion_provider.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
 
 import '../../../general/widgets/search_field.dart';
@@ -63,7 +64,7 @@ class _HomepageState extends ConsumerState<Homepage>
               ),
             )),
         elevation: 0,
-        toolbarHeight: 80,
+        toolbarHeight: 80.h,
         backgroundColor: Colors.white,
         toolbarOpacity: 0.8,
         title: const CustomText(
@@ -161,6 +162,8 @@ class _HomepageState extends ConsumerState<Homepage>
                           PlanTiles(
                             start: '04: 45',
                             end: '06:33',
+                            // switcher: Icon(Icons.done_all_outlined),
+                            // Switch(value: true, onChanged: (value) {}),
                             switcher:
                                 Switch(value: true, onChanged: (value) {}),
                           ),
@@ -177,11 +180,34 @@ class _HomepageState extends ConsumerState<Homepage>
               ),
             ),
             const HeightSpace(),
-            const ExpandWidget(
+            ExpandWidget(
               text: '''Tomorrow's Task''',
               subText: '''Tomorrow's Task are''',
-              trailing: Icon(Ionicons.time_outline),
-              children: [],
+              trailing: Padding(
+                padding: EdgeInsets.only(top: 20.h),
+                child: ref.watch(expansionStateProvider)
+                    ? const Icon(
+                        AntDesign.closecircle,
+                        color: AppConst.kLightGray,
+                      )
+                    : const Icon(
+                        AntDesign.circledown,
+                        color: AppConst.kGreen,
+                      ),
+              ),
+              // trailing: const Icon(Ionicons.time_outline),
+              isEpand: (bool expanded) {
+                ref.read(expansionStateProvider.notifier).setStart(expanded);
+              },
+              children: [
+                PlanTiles(
+                  start: '04: 45',
+                  end: '06:33',
+                  // switcher: Icon(Icons.done_all_outlined),
+                  // Switch(value: true, onChanged: (value) {}),
+                  switcher: Switch(value: true, onChanged: (value) {}),
+                ),
+              ],
             ),
             HeightSpace(hight: 17.h),
             ExpandWidget(
@@ -190,9 +216,35 @@ class _HomepageState extends ConsumerState<Homepage>
                   .toString()
                   .substring(5, 10),
               subText: '''Task for future''',
-              trailing: Icon(Ionicons.time_outline),
+              // trailing: Icon(Ionicons.time_outline),
               //  trailing: Icon(Ionicons.alarm_sharp),
-              children: [],
+              trailing: Padding(
+                padding: EdgeInsets.only(top: 20.h),
+                child: ref.watch(expansionStateTrueProvider)
+                    ? const Icon(
+                        AntDesign.closecircle,
+                        color: AppConst.kLightGray,
+                      )
+                    : const Icon(
+                        AntDesign.circledown,
+                        color: AppConst.kGreen,
+                      ),
+              ),
+              // trailing: const Icon(Ionicons.time_outline),
+              isEpand: (bool expanded) {
+                ref
+                    .read(expansionStateTrueProvider.notifier)
+                    .setStart(expanded);
+              },
+              children: [
+                PlanTiles(
+                  start: '04: 45',
+                  end: '06:33',
+                  // switcher: Icon(Icons.done_all_outlined),
+                  // Switch(value: true, onChanged: (value) {}),
+                  switcher: Switch(value: true, onChanged: (value) {}),
+                ),
+              ],
             )
           ],
         ),

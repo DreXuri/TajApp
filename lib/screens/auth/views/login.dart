@@ -43,18 +43,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(
-        context,
-        hasLeading: false,
-        leading: null,
-        backgroundColor: AppConst.kWhite,
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          Assets.onboard,
-          width: 93.w,
-          height: 106.12.h,
-        ),
-      ),
       body: Stack(
         children: [
           Padding(
@@ -70,6 +58,14 @@ class _LoginState extends State<Login> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.h),
+                    child: Image.asset(
+                      Assets.onboard,
+                      width: 93.w,
+                      height: 106.12.h,
+                    ),
+                  ),
                   Form(
                     key: _loginFormKey,
                     child: Column(

@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -34,35 +35,50 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static final defaultLightScheme =
+      ColorScheme.fromSwatch(primarySwatch: Colors.yellow);
+  static final defaultDarkScheme = ColorScheme.fromSwatch(
+      brightness: Brightness.dark, primarySwatch: Colors.yellow);
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'TodoApp',
-        theme: ThemeData(
-          // scaffoldBackgroundColor: AppConst.kBlack,
-          textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
-              .apply(fontSizeFactor: 1.sp),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          // colorScheme: ColorScheme.fromSeed(
-          //     seedColor: const Color.fromARGB(199, 23, 211, 61)),
-        ),
-        builder: (context, widget) {
-          SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-          widget = ScrollConfiguration(
-            behavior: const MyScrollBehavior(),
-            child: widget!,
-          );
-          return widget;
-        },
-        themeMode: ThemeMode.dark,
-        onGenerateRoute: (settings) => generateRoute(settings),
-        initialRoute: Onboarding.route,
-      ),
+      builder: (context, child) =>
+          DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TodoApp',
+          theme: ThemeData(
+            // scaffoldBackgroundColor: AppConst.kBlack,
+            textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
+                .apply(fontSizeFactor: 1.sp),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            colorScheme: lightColorScheme ?? defaultLightScheme,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            // scaffoldBackgroundColor: AppConst.kBlack,
+            textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
+                .apply(fontSizeFactor: 1.sp),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            colorScheme: darkColorScheme ?? defaultDarkScheme,
+            useMaterial3: true,
+          ),
+          builder: (context, widget) {
+            SystemChrome.setPreferredOrientations(
+                [DeviceOrientation.portraitUp]);
+            widget = ScrollConfiguration(
+              behavior: const MyScrollBehavior(),
+              child: widget!,
+            );
+            return widget;
+          },
+          onGenerateRoute: (settings) => generateRoute(settings),
+          initialRoute: Onboarding.route,
+        );
+      }),
     );
   }
 }

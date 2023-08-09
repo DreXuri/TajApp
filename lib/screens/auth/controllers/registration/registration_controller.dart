@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todoapp/general/core/error/failure.dart';
 import 'package:todoapp/general/params/params.dart';
 import 'package:todoapp/screens/auth/controllers/registration/registration_state.dart';
 import 'package:todoapp/screens/data/repositories/auth_repository.dart';
