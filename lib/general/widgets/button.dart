@@ -51,13 +51,13 @@ class PrimaryButton extends StatelessWidget {
                   AppConst.kListItemBackgroundColor.withOpacity(0.38),
               padding: padding ??
                   EdgeInsets.symmetric(
-                      vertical: child != null ? 12.h : 14.h, horizontal: 32.w),
+                      vertical: child != null ? 10.h : 12.h, horizontal: 28.w),
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                   color: borderColor ?? Colors.transparent,
                 ),
                 borderRadius: BorderRadius.circular(
-                  borderRadius ?? 4.r,
+                  borderRadius ?? 10.r,
                 ),
               ),
             ),

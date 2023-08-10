@@ -4,10 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
+import 'package:todoapp/general/widgets/background_widget.dart';
+import 'package:todoapp/general/widgets/button.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/inputs.dart';
 import 'package:todoapp/general/widgets/message_textfield.dart';
+import 'package:todoapp/general/widgets/width_space.dart';
 
 class AddTask extends ConsumerStatefulWidget {
   static const routeName = '/add_farm';
@@ -29,58 +32,77 @@ class _AddTaskState extends ConsumerState<AddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _addTaskFormKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 15.h),
-          child: ListView(
-            children: [
-              CustomText(
-                data: 'Farm Name',
-                textAlign: TextAlign.start,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              HeightSpace(),
-              InputWidget(
-                controller: _farmNameController,
-                hintText: 'Enter Farm Name',
-                hasLabel: false,
-                validator: (p0) => InputValidator.validateEmpty(value: p0!),
-              ),
-              HeightSpace(),
-              CustomText(
-                data: 'Farm Address',
-                textAlign: TextAlign.start,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              HeightSpace(),
-              Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: InputWidget(
-                  controller: _farmAddressController,
-                  hintText: 'Enter farm address',
-                  hasLabel: false,
-                  validator: (p0) => InputValidator.validateEmpty(value: p0!),
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 140,
-                child: MessageTextField(
-                  hintText: 'Description',
-                  controller: _bioController,
-                  hasLabel: false,
-                  fillColor: AppConst.kWhite,
-                  keyBoardType: TextInputType.multiline,
+      body: Background(
+        child: Form(
+          key: _addTaskFormKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.h, vertical: 2.h),
+            child: ListView(
+              children: [
+                CustomText(
+                  data: 'Add Title',
                   textAlign: TextAlign.start,
-                  validator: (p0) => InputValidator.validateEmpty(value: p0!),
-                  textAlignVertical: TextAlignVertical.top,
-                  padding: EdgeInsets.only(left: 0, right: 0, top: 16.0.h),
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
                 ),
-              ),
-            ],
+                const HeightSpace(),
+                InputWidget(
+                  controller: _farmNameController,
+                  hintText: 'Enter Task Tile',
+                  hasLabel: false,
+                  validator: (p0) => InputValidator.validateEmpty(value: p0!),
+                ),
+                const HeightSpace(),
+                SizedBox(
+                  width: double.infinity,
+                  height: 140,
+                  child: MessageTextField(
+                    hintText: 'Description',
+                    controller: _bioController,
+                    hasLabel: false,
+                    fillColor: AppConst.kWhite,
+                    keyBoardType: TextInputType.multiline,
+                    textAlign: TextAlign.start,
+                    validator: (p0) => InputValidator.validateEmpty(value: p0!),
+                    textAlignVertical: TextAlignVertical.top,
+                    padding: EdgeInsets.only(left: 0, right: 0, top: 16.0.h),
+                  ),
+                ),
+                const HeightSpace(),
+                SizedBox(
+                  height: 44.h,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: PrimaryButton(
+                        hasOuterPadding: false,
+                        onPressed: () {},
+                        text: 'Start Time',
+                      )),
+                      const WidthSpace(),
+                      Expanded(
+                          child: PrimaryButton(
+                        hasOuterPadding: false,
+                        onPressed: () {},
+                        text: 'End Timre',
+                      )),
+                    ],
+                  ),
+                ),
+                const HeightSpace(),
+                PrimaryButton(
+                  hasOuterPadding: false,
+                  onPressed: () {},
+                  text: 'Pick Date',
+                ),
+                const HeightSpace(),
+                PrimaryButton(
+                  hasOuterPadding: false,
+                  onPressed: () {},
+                  text: 'Submit Task',
+                )
+              ],
+            ),
           ),
         ),
       ),

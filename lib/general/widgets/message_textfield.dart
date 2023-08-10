@@ -70,7 +70,7 @@ class MessageTextField extends StatelessWidget {
           border: inputBorder,
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: borderColor),
-              borderRadius: BorderRadius.circular(8.0.r)),
+              borderRadius: BorderRadius.circular(12.0.r)),
           contentPadding: EdgeInsets.symmetric(
               vertical: verticalContentPadding ?? 18.0.h, horizontal: 16.0.w),
           hintText: hintText,
@@ -94,10 +94,10 @@ class MessageTextField extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppConst.kBorderColor),
-              borderRadius: BorderRadius.circular(8.0.r)),
+              borderRadius: BorderRadius.circular(12.0.r)),
           errorBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppConst.kPrimaryRed),
-              borderRadius: BorderRadius.circular(8.0)),
+              borderRadius: BorderRadius.circular(12.0)),
         ),
         onChanged: (String value) => onChanged?.call(value),
         validator: (String? value) => validator?.call(value),
@@ -168,7 +168,7 @@ class MultiLineCustomTextField extends StatelessWidget {
         isDense: true,
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppConst.kBorderColor),
-            borderRadius: BorderRadius.circular(12.0)),
+            borderRadius: BorderRadius.circular(122.0)),
         contentPadding:
             EdgeInsets.symmetric(vertical: 18.0.h, horizontal: 16.0.w),
         hintText: !enabled && initialValue != null ? null : hintText,
@@ -191,10 +191,10 @@ class MultiLineCustomTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppConst.kBorderColor),
-            borderRadius: BorderRadius.circular(12.0)),
+            borderRadius: BorderRadius.circular(122.0)),
         errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppConst.kPrimaryRed),
-            borderRadius: BorderRadius.circular(12.0)),
+            borderRadius: BorderRadius.circular(122.0)),
       ),
       onChanged: (String value) => onChanged?.call(value),
       validator: (String? value) => validator?.call(value),
