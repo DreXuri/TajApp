@@ -1,10 +1,12 @@
 // Route? onGenerateRoutes(RouteSettings settings) {
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:todoapp/general/widgets/navbar.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
 import 'package:todoapp/screens/auth/views/otp_phone.dart';
 import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/views/homepage.dart';
+import 'package:todoapp/screens/home/views/profile.dart';
 import 'package:todoapp/screens/onboarding/views/onborading.dart';
 
 Route? generateRoute(RouteSettings settings) {
@@ -14,9 +16,19 @@ Route? generateRoute(RouteSettings settings) {
         child: const Onboarding(),
         type: PageTransitionType.rightToLeft,
       );
+    case BottomBar.routeName:
+      return PageTransition(
+        child: const BottomBar(),
+        type: PageTransitionType.rightToLeft,
+      );
     case Homepage.route:
       return PageTransition(
         child: const Homepage(),
+        type: PageTransitionType.rightToLeft,
+      );
+    case Profile.route:
+      return PageTransition(
+        child: const Profile(),
         type: PageTransitionType.rightToLeft,
       );
     case AddTask.routeName:
