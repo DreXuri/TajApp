@@ -130,15 +130,6 @@ class _HomepageState extends ConsumerState<Homepage>
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold,
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, AddTask.routeName);
-                    },
-                    child: Icon(Ionicons.add_sharp,
-                        size: 20.h, color: AppConst.kPrimary),
-                  ),
-                ),
               ],
             ),
             const HeightSpace(),
@@ -259,6 +250,11 @@ class _HomepageState extends ConsumerState<Homepage>
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppConst.kPrimary,
+        onPressed: () {},
+        child: Icon(Ionicons.add_sharp, size: 30.h, color: AppConst.kWhite),
       ),
     );
   }
