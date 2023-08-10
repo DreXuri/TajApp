@@ -10,8 +10,13 @@ import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
 import 'package:todoapp/screens/home/cobtrollers/expandsion%20controller/expansion_provider.dart';
+import 'package:todoapp/screens/home/cobtrollers/home_controller/home_provider.dart';
+import 'package:todoapp/screens/home/model/task_model.dart';
 import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
+import 'package:todoapp/screens/home/widgets/taski_item_list.dart';
+import 'package:todoapp/screens/home/widgets/todays_task.dart';
+import 'package:todoapp/screens/home/widgets/tomaoList.dart';
 
 import '../../../general/widgets/search_field.dart';
 
@@ -159,18 +164,7 @@ class _HomepageState extends ConsumerState<Homepage>
                     Container(
                       color: AppConst.kBlack,
                       height: AppConst.kHeight * 0.3,
-                      child: ListView(
-                        children: [
-                          PlanTiles(
-                            start: '04: 45',
-                            end: '06:33',
-                            // switcher: Icon(Icons.done_all_outlined),
-                            // Switch(value: true, onChanged: (value) {}),
-                            switcher:
-                                Switch(value: true, onChanged: (value) {}),
-                          ),
-                        ],
-                      ),
+                      child: TodayTask(),
                     ),
                     Container(
                       color: AppConst.kSecondaryYellow,
@@ -182,35 +176,7 @@ class _HomepageState extends ConsumerState<Homepage>
               ),
             ),
             const HeightSpace(),
-            ExpandWidget(
-              text: '''Tomorrow's Task''',
-              subText: '''Tomorrow's Task are''',
-              trailing: Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: ref.watch(expansionStateProvider)
-                    ? const Icon(
-                        AntDesign.closecircle,
-                        color: AppConst.kLightGray,
-                      )
-                    : const Icon(
-                        AntDesign.circledown,
-                        color: AppConst.kGreen,
-                      ),
-              ),
-              // trailing: const Icon(Ionicons.time_outline),
-              isEpand: (bool expanded) {
-                ref.read(expansionStateProvider.notifier).setStart(expanded);
-              },
-              children: [
-                PlanTiles(
-                  start: '04: 45',
-                  end: '06:33',
-                  // switcher: Icon(Icons.done_all_outlined),
-                  // Switch(value: true, onChanged: (value) {}),
-                  switcher: Switch(value: true, onChanged: (value) {}),
-                ),
-              ],
-            ),
+            const TomaoList(),
             HeightSpace(hight: 17.h),
             ExpandWidget(
               text: DateTime.now()
@@ -252,12 +218,16 @@ class _HomepageState extends ConsumerState<Homepage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppConst.kPrimary,
         onPressed: () {
           Navigator.of(context).pushNamed(AddTask.routeName);
         },
+        backgroundColor: AppConst.kPrimary,
+        tooltip: 'AddTask',
+        elevation: 5,
+        splashColor: Colors.grey,
         child: Icon(Ionicons.add_sharp, size: 30.h, color: AppConst.kWhite),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
