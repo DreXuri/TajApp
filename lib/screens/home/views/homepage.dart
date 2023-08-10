@@ -67,7 +67,7 @@ class _HomepageState extends ConsumerState<Homepage>
             )),
         elevation: 0,
         toolbarHeight: 80.h,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         toolbarOpacity: 0.8,
         title: const CustomText(
           data: 'Dashboard',
