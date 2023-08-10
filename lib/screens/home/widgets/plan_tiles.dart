@@ -11,12 +11,14 @@ class PlanTiles extends StatelessWidget {
       {super.key,
       this.colo,
       this.description,
+      this.title,
       this.start,
       this.end,
       this.edit,
       this.remove,
       this.switcher});
   final Color? colo;
+  final String? title;
   final String? description;
   final String? start;
   final String? end;
@@ -35,7 +37,8 @@ class PlanTiles extends StatelessWidget {
               padding: EdgeInsets.all(8.h),
               width: AppConst.kWidth,
               decoration: BoxDecoration(
-                color: AppConst.kLightGray,
+                // color: AppConst.kLightGray,
+                color: AppConst.kWhite,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10.r),
                   topRight: Radius.circular(10.r),
@@ -50,8 +53,6 @@ class PlanTiles extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(
                           15.r,
                         )),
-                        // TODO  change this later
-
                         color: colo ?? AppConst.kPrimary),
                   ),
                   const WidthSpace(),
@@ -61,7 +62,7 @@ class PlanTiles extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          data: 'Title of Plan',
+                          data: title ?? 'Title of Plan',
                           textAlign: TextAlign.start,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class PlanTiles extends StatelessWidget {
                           hight: 4.h,
                         ),
                         CustomText(
-                          data: description ?? 'Title of plan',
+                          data: description ?? 'Description of plan',
                           textAlign: TextAlign.start,
                           // color: AppConst.kWhite,
                           fontSize: 12.sp,
