@@ -11,6 +11,9 @@ import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/inputs.dart';
 import 'package:todoapp/general/widgets/message_textfield.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
+import 'package:todoapp/screens/home/cobtrollers/date_controllers/date_provider.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as picker;
 
 class AddTask extends ConsumerStatefulWidget {
   static const routeName = '/add_farm';
@@ -27,9 +30,12 @@ class _AddTaskState extends ConsumerState<AddTask> {
   final GlobalKey<FormState> _addTaskFormKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
-  DateTime? selectedDate;
+  // DateTime? selectedDate;
   @override
   Widget build(BuildContext context) {
+    String selectedDate = ref.watch(dateStateProvider);
+    String selectedStartTime = ref.watch(timeStartStateProvider);
+    String selectedStopTime = ref.watch(timeEndStateProvider);
     return Scaffold(
       body: Background(
         child: Form(
@@ -75,15 +81,45 @@ class _AddTaskState extends ConsumerState<AddTask> {
                       Expanded(
                           child: PrimaryButton(
                         hasOuterPadding: false,
-                        onPressed: () {},
-                        text: 'Start Time',
+                        onPressed: () {
+                          picker.DatePicker.showTime12hPicker(
+                            context,
+                            showTitleActions: true,
+                            onConfirm: (date) {
+                              ref
+                                  .read(timeStartStateProvider.notifier)
+                                  .setStartTime(date.toString());
+                              ;
+                              print('confirm $date');
+                            },
+                            currentTime: DateTime.now().toUtc(),
+                          );
+                        },
+                        text: selectedStartTime == ''
+                            ? 'Start Time'
+                            : selectedStartTime.substring(10, 16),
                       )),
                       const WidthSpace(),
                       Expanded(
                           child: PrimaryButton(
                         hasOuterPadding: false,
-                        onPressed: () {},
-                        text: 'End Timre',
+                        onPressed: () {
+                          picker.DatePicker.showTime12hPicker(
+                            context,
+                            showTitleActions: true,
+                            onConfirm: (date) {
+                              ref
+                                  .read(timeEndStateProvider.notifier)
+                                  .setEndDate(date.toString());
+                              ;
+                              print('confirm $date');
+                            },
+                            currentTime: DateTime.now().toUtc(),
+                          );
+                        },
+                        text: selectedStopTime == ''
+                            ? 'End Time'
+                            : selectedStopTime.substring(10, 16),
                       )),
                     ],
                   ),
@@ -94,24 +130,35 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   onPressed: () async {
                     final date = await showDatePickerDialog(
                       context: context,
+                      currentDateColor: AppConst.kWhite,
                       initialDate: DateTime.now(),
                       maxDate:
                           DateTime.now().add(const Duration(days: 365 * 3)),
                       minDate: DateTime.now()
                           .subtract(const Duration(days: 365 * 3)),
                     );
+
                     if (date != null) {
-                      setState(() {
-                        selectedDate = date;
-                      });
+                      ref
+                          .read(dateStateProvider.notifier)
+                          .setDate(date.toString());
                     }
                   },
-                  text: 'Pick Date',
+                  text: selectedDate == ''
+                      ? 'Submit Task'
+                      : selectedDate.substring(0, 10),
                 ),
                 const HeightSpace(),
                 PrimaryButton(
                   hasOuterPadding: false,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_addTaskFormKey.currentState!.validate() &&
+                        selectedDate.isNotEmpty &&
+                        selectedStartTime.isNotEmpty &&
+                        selectedStopTime.isNotEmpty) {
+                      print('hello');
+                    }
+                  },
                   text: 'Submit Task',
                 )
               ],
