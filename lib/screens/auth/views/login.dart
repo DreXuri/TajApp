@@ -15,6 +15,7 @@ import 'package:todoapp/general/widgets/custom_snackbar.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/inputs.dart';
+import 'package:todoapp/general/widgets/navbar.dart';
 import 'package:todoapp/screens/auth/controllers/registration/registration_controller.dart';
 import 'package:todoapp/screens/auth/views/otp_phone.dart';
 import 'package:todoapp/screens/auth/widgets/phone_number_field.dart';
@@ -82,7 +83,7 @@ class _LoginState extends State<Login> {
                         PrimaryButton(
                           onPressed: () {
                             Navigator.pushReplacementNamed(
-                                context, Homepage.route);
+                                context, BottomBar.routeName);
                           },
                           text: 'Get code',
                         ),

@@ -52,3 +52,12 @@ class AppConst {
   static double kHeight = 825.h;
   static double kWidth = 366.w;
 }
+
+List<dynamic> colors = const [
+  Color(0xFFF91414),
+  Color(0xFFFBB040),
+  Color(0xFF2BC753),
+  Color(0xFF89C348),
+  Color(0xFF898A8D),
+  Color(0xFF7E0E5B),
+];
