@@ -6,17 +6,19 @@ import 'dart:async';
 
 class DBHeler {
   static Future<void> createTables(sql.Database database) async {
-    await database.execute('CREATE TABLES todos ('
-        'id INTEGER  PRIMARY KEY AUTOINCREMENT,'
-        'title STRING, description TEXT, date STRING,'
-        'createdAt STRING, updatedAt String,'
-        'remind INTEGER, repeat STRING,'
-        'isCompleted INTEGER,'
-        ')');
-    await database.execute('CREATE TABLES user ('
-        'id INTEGER  PRIMARY KEY AUTOINCREMENT DEFAULT 0,'
-        'isVerified INTEGER,'
-        ')');
+    await database.execute(
+      'CREATE TABLE todos ('
+      'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+      'title STRING, description TEXT, date STRING,'
+      'createdAt STRING, updatedAt STRING,'
+      'remind INTEGER, repeat STRING,'
+      'isCompleted INTEGER)',
+    );
+    await database.execute(
+      'CREATE TABLE user ('
+      'id INTEGER  PRIMARY KEY AUTOINCREMENT DEFAULT 0,'
+      'isVerified INTEGER)',
+    );
   }
 
   static Future<sql.Database> db() async {
@@ -81,7 +83,7 @@ class DBHeler {
       'isCompleted': isCompleted,
       'date': date,
       'createdAt': createdAt,
-      '  updatedAt': updatedAt
+      'updatedAt': updatedAt
     };
     final result =
         await db.update('todos', data, where: 'id =?', whereArgs: [id]);
