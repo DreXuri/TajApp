@@ -253,7 +253,9 @@ class _HomepageState extends ConsumerState<Homepage>
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppConst.kPrimary,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(AddTask.routeName);
+        },
         child: Icon(Ionicons.add_sharp, size: 30.h, color: AppConst.kWhite),
       ),
     );
