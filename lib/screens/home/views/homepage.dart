@@ -50,6 +50,7 @@ class _HomepageState extends ConsumerState<Homepage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(60.h),
