@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
 import 'package:todoapp/general/widgets/background_widget.dart';
@@ -25,10 +25,9 @@ class AddTask extends ConsumerStatefulWidget {
 class _AddTaskState extends ConsumerState<AddTask> {
   // bool selected = false;
   final GlobalKey<FormState> _addTaskFormKey = GlobalKey<FormState>();
-  final TextEditingController _farmNameController = TextEditingController();
-  final TextEditingController _farmAddressController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
-
+  DateTime? selectedDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +46,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                 ),
                 const HeightSpace(),
                 InputWidget(
-                  controller: _farmNameController,
+                  controller: _titleController,
                   hintText: 'Enter Task Tile',
                   hasLabel: false,
                   validator: (p0) => InputValidator.validateEmpty(value: p0!),
@@ -92,7 +91,21 @@ class _AddTaskState extends ConsumerState<AddTask> {
                 const HeightSpace(),
                 PrimaryButton(
                   hasOuterPadding: false,
-                  onPressed: () {},
+                  onPressed: () async {
+                    final date = await showDatePickerDialog(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      maxDate:
+                          DateTime.now().add(const Duration(days: 365 * 3)),
+                      minDate: DateTime.now()
+                          .subtract(const Duration(days: 365 * 3)),
+                    );
+                    if (date != null) {
+                      setState(() {
+                        selectedDate = date;
+                      });
+                    }
+                  },
                   text: 'Pick Date',
                 ),
                 const HeightSpace(),
