@@ -14,6 +14,8 @@ import 'package:todoapp/general/widgets/width_space.dart';
 import 'package:todoapp/screens/home/cobtrollers/date_controllers/date_provider.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
+import 'package:todoapp/screens/home/cobtrollers/home_controller/home_provider.dart';
+import 'package:todoapp/screens/home/model/task_model.dart';
 
 import '../../../general/utils/utils.dart';
 
@@ -179,7 +181,23 @@ class _AddTaskState extends ConsumerState<AddTask> {
                       print('hello');
                       return;
                     } else {
-                      print('hello how are you');
+                      Tasks task = Tasks(
+                        title: _titleController.text,
+                        description: _bioController.text,
+                        isCompleted: 0,
+                        date: selectedDate,
+                        createdAt: selectedStartTime,
+                        updatedAt: selectedStopTime,
+                        remind: 0,
+                        repeat: 'yes',
+                      );
+                      ref.read(homeStateProvider.notifier).addItem(task);
+                      ref
+                          .read(timeStartStateProvider.notifier)
+                          .setStartTime('');
+                      ref.read(timeEndStateProvider.notifier).setEndDate('');
+                      ref.read(dateStateProvider.notifier).setDate('');
+                      Navigator.pop(context);
                     }
                   },
                   text: 'Submit Task',

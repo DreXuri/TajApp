@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todoapp/general/helpers/db_helper.dart';
+import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/screens/home/model/task_model.dart';
 
 part 'home_provider.g.dart';
@@ -70,5 +73,13 @@ class HomeState extends _$HomeState {
       isCompleted = true;
     }
     return isCompleted;
+  }
+
+  //change colorstate
+  dynamic getRandomColor() {
+    Random random = Random();
+    int randomIndex = random.nextInt(colors.length);
+
+    return colors[randomIndex];
   }
 }
