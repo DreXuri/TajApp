@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
 import 'package:todoapp/screens/auth/views/otp_phone.dart';
+import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/views/homepage.dart';
 import 'package:todoapp/screens/onboarding/views/onborading.dart';
 
@@ -16,6 +17,11 @@ Route? generateRoute(RouteSettings settings) {
     case Homepage.route:
       return PageTransition(
         child: const Homepage(),
+        type: PageTransitionType.rightToLeft,
+      );
+    case AddTask.routeName:
+      return PageTransition(
+        child: const AddTask(),
         type: PageTransitionType.rightToLeft,
       );
     case Login.route:

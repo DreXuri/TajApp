@@ -10,6 +10,7 @@ import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
 import 'package:todoapp/screens/home/cobtrollers/expandsion%20controller/expansion_provider.dart';
+import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
 
 import '../../../general/widgets/search_field.dart';
@@ -127,6 +128,15 @@ class _HomepageState extends ConsumerState<Homepage>
                   color: AppConst.kBlack,
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold,
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, AddTask.routeName);
+                    },
+                    child: Icon(Ionicons.add_sharp,
+                        size: 20.h, color: AppConst.kPrimary),
+                  ),
                 ),
               ],
             ),
