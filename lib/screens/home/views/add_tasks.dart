@@ -36,6 +36,27 @@ class _AddTaskState extends ConsumerState<AddTask> {
     String selectedDate = ref.watch(dateStateProvider);
     String selectedStartTime = ref.watch(timeStartStateProvider);
     String selectedStopTime = ref.watch(timeEndStateProvider);
+
+    bool validate() {
+      if (_addTaskFormKey.currentState!.validate()) return false;
+      if (selectedDate.isNotEmpty) {
+        showCustomSnackBarAfterFrame(context, 'You need to pick a start time',
+            isError: true);
+        return false;
+      }
+      if (selectedStartTime.isNotEmpty) {
+        showCustomSnackBarAfterFrame(context, 'You need to pick a start time',
+            isError: true);
+        return false;
+      }
+      if (selectedStopTime.isNotEmpty) {
+        showCustomSnackBarAfterFrame(context, 'You need to Select a date',
+            isError: true);
+        return false;
+      }
+      return true;
+    }
+
     return Scaffold(
       body: Background(
         child: Form(
@@ -152,10 +173,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                 PrimaryButton(
                   hasOuterPadding: false,
                   onPressed: () {
-                    if (_addTaskFormKey.currentState!.validate() &&
-                        selectedDate.isNotEmpty &&
-                        selectedStartTime.isNotEmpty &&
-                        selectedStopTime.isNotEmpty) {
+                    if (validate()) {
                       print('hello');
                     }
                   },
