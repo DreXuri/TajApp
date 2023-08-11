@@ -48,10 +48,10 @@ PreferredSizeWidget customAppBar(
                       ),
                       child: CircleAvatar(
                         radius: 14,
-                        backgroundColor: AppConst.kWhite,
+                        backgroundColor: Colors.transparent,
                         child: RotatedBox(
                           quarterTurns: 0,
-                          child: Icon(Ionicons.chevron_forward_circle,
+                          child: Icon(Ionicons.chevron_back_circle,
                               size: 30.h, color: AppConst.kPrimary),
                         ),
                       ),
@@ -73,7 +73,7 @@ PreferredSizeWidget customAppBar(
             data: titleText,
             overflow: TextOverflow.fade,
             fontSize: fontSize ?? 20.0.sp,
-            color: titleColor ?? AppConst.kWhite,
+            color: titleColor ?? AppConst.kBlack,
             fontWeight: fontWeight,
             textAlign: TextAlign.center,
           ),
