@@ -6,15 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todoapp/firebase_options.dart';
 import 'package:todoapp/general/configs/routes.dart';
-import 'package:todoapp/general/utils/color_constant.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'general/widgets/my_scroll_behaviour.dart';
 import 'screens/onboarding/views/onborading.dart';
+
+
+//TODO xcode url for firebase
+// com.googleusercontent.apps.364634384884-i9hr83qmaps5cl1s14gp55gokv5p74c9
 
 void main() async {
   _setupLoggin();
   WidgetsFlutterBinding.ensureInitialized();
+
+
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+ );
+
+
+
+
+
+
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(
