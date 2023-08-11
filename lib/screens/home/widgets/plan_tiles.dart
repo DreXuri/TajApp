@@ -61,39 +61,46 @@ class PlanTiles extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(
-                          data: title ?? 'Title of Plan',
-                          textAlign: TextAlign.start,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          // color: AppConst.kWhite,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: CustomText(
+                            data: title ?? 'Title of Plan',
+                            textAlign: TextAlign.start,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            // color: AppConst.kWhite,
+                          ),
                         ),
                         HeightSpace(
                           hight: 4.h,
                         ),
-                        CustomText(
-                          data: description ?? 'Description of plan',
-                          textAlign: TextAlign.start,
-                          // color: AppConst.kWhite,
-                          fontSize: 12.sp,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: CustomText(
+                            data: description ?? 'Description of plan',
+                            textAlign: TextAlign.start,
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         const HeightSpace(),
                         Row(
                           children: [
                             Container(
                               width: AppConst.kWidth * 0.3,
-                              height: 25.h,
+                              height: 20.h,
                               decoration: BoxDecoration(
+                                  color: AppConst.kBlack,
                                   border: Border.all(
-                                    width: 0.3,
-                                  ),
+                                      width: 0.5.w, color: AppConst.kPrimary),
                                   borderRadius: BorderRadius.circular(10.r)),
                               // color: AppConst.kWhite,
                               child: Center(
                                 child: CustomText(
-                                  // color: AppConst.kWhite,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w400,
                                   data: '$start ~  $end',
-                                  fontSize: 12.sp,
+                                  color: AppConst.kWhite,
                                   textAlign: TextAlign.start,
                                 ),
                               ),
@@ -101,6 +108,7 @@ class PlanTiles extends StatelessWidget {
                             HeightSpace(hight: 15.h),
                             Row(
                               children: [
+                                const WidthSpace(),
                                 SizedBox(
                                   child: edit,
                                 ),
@@ -119,7 +127,9 @@ class PlanTiles extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.only(bottom: 10.w),
+                      height: 25.h,
+                      // width: 50.w,
+                      padding: EdgeInsets.only(bottom: 3.w),
                       child: switcher,
                     ),
                   ),
