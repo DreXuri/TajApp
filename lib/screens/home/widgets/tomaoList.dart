@@ -6,6 +6,7 @@ import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/screens/home/cobtrollers/expandsion%20controller/expansion_provider.dart';
 import 'package:todoapp/screens/home/model/task_model.dart';
+import 'package:todoapp/screens/home/views/edit_task.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
 
 import '../cobtrollers/home_controller/home_provider.dart';
@@ -27,6 +28,7 @@ class TomaoList extends ConsumerWidget {
     return ExpandWidget(
       text: '''Tomorrow's Task''',
       subText: '''Tomorrow's Task are''',
+      colo: color,
       trailing: Padding(
         padding: EdgeInsets.only(top: 20.h),
         child: ref.watch(expansionStateProvider)
@@ -47,15 +49,25 @@ class TomaoList extends ConsumerWidget {
       children: [
         for (var task in tomaoList)
           PlanTiles(
-            start: task.createdAt,
-            end: task.updatedAt,
+            start: task.createdAt.substring(10, 16),
+            end: task.updatedAt.substring(10, 16),
             description: task.description,
             colo: color,
             title: task.title,
-            // edit: ,
+            edit: InkWell(
+              onTap: () {
+                titl = task.title;
+                descriptio = task.description;
+
+                Navigator.of(context).pushNamed(
+                  EditTask.route,
+                  arguments: task.id,
+                );
+              },
+              child: const Icon(Icons.edit_note_outlined),
+            ),
             remove: () =>
                 ref.read(homeStateProvider.notifier).deleteItem(task.id),
-
             switcher: SizedBox.shrink(),
           ),
       ],

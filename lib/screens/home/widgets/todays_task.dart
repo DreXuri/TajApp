@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/screens/home/cobtrollers/home_controller/home_provider.dart';
 import 'package:todoapp/screens/home/model/task_model.dart';
+import 'package:todoapp/screens/home/views/edit_task.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
 
 class TodayTask extends ConsumerWidget {
@@ -30,8 +32,17 @@ class TodayTask extends ConsumerWidget {
         dynamic color = ref.read(homeStateProvider.notifier).getRandomColor();
         return PlanTiles(
           edit: InkWell(
-            onTap: () {},
-            child: Icon(Icons.edit),
+            onTap: () {
+              // String titl = setTask.title;
+              // String decs = setTask.description;
+              titl = setTask.title;
+              descriptio = setTask.description;
+              Navigator.of(context).pushNamed(
+                EditTask.route,
+                arguments: setTask.id,
+              );
+            },
+            child: const Icon(Icons.edit_note_outlined),
           ),
           remove: () =>
               ref.read(homeStateProvider.notifier).deleteItem(setTask.id),
@@ -39,7 +50,18 @@ class TodayTask extends ConsumerWidget {
           end: setTask.updatedAt.substring(10, 16),
           start: setTask.createdAt.substring(10, 16),
           title: setTask.title,
-          switcher: Switch(value: isCompleted, onChanged: (value) {}),
+          switcher: Switch(
+              value: isCompleted,
+              onChanged: (value) {
+                ref.read(homeStateProvider.notifier).markAsUpdateItem(
+                    setTask.id,
+                    setTask.title,
+                    setTask.description,
+                    1,
+                    setTask.date,
+                    setTask.createdAt,
+                    setTask.updatedAt);
+              }),
           // data: todayList[index],
         );
       },
