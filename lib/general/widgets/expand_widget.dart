@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
@@ -13,10 +11,12 @@ class ExpandWidget extends StatelessWidget {
     this.trailing,
     required this.children,
     this.isEpand,
+    this.colo,
   });
   final String text;
   final String subText;
   final Widget? trailing;
+  final Color? colo;
   final List<Widget> children;
   final void Function(bool)? isEpand;
 
@@ -31,7 +31,7 @@ class ExpandWidget extends StatelessWidget {
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
             title: BottomTitles(
-              color: AppConst.kErrorColor,
+              color: colo ?? AppConst.kErrorColor,
               subText: subText,
               text: text,
             ),
