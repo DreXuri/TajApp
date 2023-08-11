@@ -5,6 +5,7 @@ import 'package:todoapp/general/widgets/navbar.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
 import 'package:todoapp/screens/auth/views/otp_phone.dart';
 import 'package:todoapp/screens/home/views/add_tasks.dart';
+import 'package:todoapp/screens/home/views/edit_task.dart';
 import 'package:todoapp/screens/home/views/homepage.dart';
 import 'package:todoapp/screens/home/views/profile.dart';
 import 'package:todoapp/screens/onboarding/views/onborading.dart';
@@ -24,6 +25,22 @@ Route? generateRoute(RouteSettings settings) {
     case Homepage.route:
       return PageTransition(
         child: const Homepage(),
+        type: PageTransitionType.rightToLeft,
+      );
+
+    //     case EditFarm.routeName:
+    // return PageTransition(
+    //     child: EditFarm(
+    //       farmModel: settings.arguments as FarmDetailModel,
+    //       farmId: settings.arguments as String,
+    //     ),
+    case EditTask.route:
+      return PageTransition(
+        child: EditTask(
+          id: settings.arguments as int,
+          // titl: settings.arguments as String,
+          // decs: settings.arguments as String,
+        ),
         type: PageTransitionType.rightToLeft,
       );
     case Profile.route:

@@ -41,6 +41,23 @@ class _LoginState extends State<Login> {
     _textController.dispose();
   }
 
+sendcODE(){
+  if (phone.text.isEmpty) {
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,33 +105,36 @@ class _LoginState extends State<Login> {
                           text: 'Get code',
                         ),
                         const HeightSpace(),
-                        Consumer(
-                          builder: (_, WidgetRef ref, Widget? child) {
-                            final state = ref.watch(regControllerProvider);
+                        // Consumer(
+                        //   builder: (_, WidgetRef ref, Widget? child) {
+                        //     final state = ref.watch(regControllerProvider);
 
-                            ref.listen(
-                              regControllerProvider,
-                              (previous, next) {
-                                next.when(
-                                  initial: () => null,
-                                  loading: () => null,
-                                  loaded: () => _onWidgetDidBuild(
-                                      context, OtpPhoneScreen.route),
-                                  error: (message) => _showSnackBar(
-                                      context, message,
-                                      isError: true),
-                                );
-                              },
-                            );
+                        //     ref.listen(
+                        //       regControllerProvider,
+                        //       (previous, next) {
+                        //         next.when(
+                        //           initial: () => null,
+                        //           loading: () => null,
+                        //           loaded: () => _onWidgetDidBuild(
+                        //               context, OtpPhoneScreen.route),
+                        //           error: (message) => _showSnackBar(
+                        //               context, message,
+                        //               isError: true),
+                        //         );
+                        //       },
+                        //     );
 
-                            return state.when(
-                              initial: () => _continueButton(ref),
-                              loading: () => const CustomLoadingIndicator(),
-                              loaded: () => _continueButton(ref),
-                              error: (value) => _continueButton(ref),
-                            );
-                          },
-                        ),
+                        //     return state.when(
+                        //       initial: () => _continueButton(ref),
+                        //       loading: () => const CustomLoadingIndicator(),
+                        //       loaded: () => _continueButton(ref),
+                        //       error: (value) => _continueButton(ref),
+                        //     );
+                        //   },
+                        // ),
+                      
+                      
+                      
                         HeightSpace(hight: 149.h),
                       ],
                     ),

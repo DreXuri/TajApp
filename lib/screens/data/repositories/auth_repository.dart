@@ -1,11 +1,11 @@
-import 'package:riverpod/riverpod.dart';
+// import 'package:riverpod/riverpod.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepositoryImpl(),
-);
+// final authRepositoryProvider = Provider<AuthRepository>(
+//   (ref) => AuthRepositoryImpl(),
+// );
 
-abstract class AuthRepository {}
+// abstract class AuthRepository {}
 
-class AuthRepositoryImpl implements AuthRepository {
-  const AuthRepositoryImpl();
-}
+// class AuthRepositoryImpl implements AuthRepository {
+//   const AuthRepositoryImpl();
+// }

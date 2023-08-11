@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
+import 'package:todoapp/general/widgets/app_bar.dart';
 import 'package:todoapp/general/widgets/background_widget.dart';
 import 'package:todoapp/general/widgets/button.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
@@ -62,6 +63,11 @@ class _AddTaskState extends ConsumerState<AddTask> {
     }
 
     return Scaffold(
+      appBar: customAppBar(
+        context,
+        titleText: 'Add Task',
+        backgroundColor: Colors.transparent,
+      ),
       body: Background(
         child: Form(
           key: _addTaskFormKey,
@@ -170,7 +176,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                     }
                   },
                   text: selectedDate == ''
-                      ? 'Submit Task'
+                      ? 'Select Date'
                       : selectedDate.substring(0, 10),
                 ),
                 const HeightSpace(),

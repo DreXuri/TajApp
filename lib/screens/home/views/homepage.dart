@@ -10,11 +10,10 @@ import 'package:todoapp/general/widgets/expand_widget.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/general/widgets/width_space.dart';
 import 'package:todoapp/screens/home/cobtrollers/expandsion%20controller/expansion_provider.dart';
-import 'package:todoapp/screens/home/cobtrollers/home_controller/home_provider.dart';
-import 'package:todoapp/screens/home/model/task_model.dart';
+
 import 'package:todoapp/screens/home/views/add_tasks.dart';
+import 'package:todoapp/screens/home/widgets/completed_task.dart';
 import 'package:todoapp/screens/home/widgets/plan_tiles.dart';
-import 'package:todoapp/screens/home/widgets/taski_item_list.dart';
 import 'package:todoapp/screens/home/widgets/todays_task.dart';
 import 'package:todoapp/screens/home/widgets/tomaoList.dart';
 
@@ -164,13 +163,12 @@ class _HomepageState extends ConsumerState<Homepage>
                     Container(
                       color: AppConst.kBlack,
                       height: AppConst.kHeight * 0.3,
-                      child: TodayTask(),
+                      child: const TodayTask(),
                     ),
                     Container(
-                      color: AppConst.kSecondaryYellow,
-                      height: AppConst.kHeight * 0.3,
-                      // child: ,
-                    ),
+                        color: AppConst.kWhite,
+                        height: AppConst.kHeight * 0.3,
+                        child: const CompletedTask()),
                   ],
                 ),
               ),

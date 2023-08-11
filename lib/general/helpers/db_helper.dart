@@ -62,7 +62,7 @@ class DBHeler {
     return db.query('todos', where: 'id =?', whereArgs: [id], limit: 1);
   }
 
-  static Future<List<Map<String, dynamic>>> getUser() async {
+  static Future<List<Map<String, dynamic>>> getUsers() async {
     final db = await DBHeler.db();
     return db.query('user', orderBy: 'id');
   }
