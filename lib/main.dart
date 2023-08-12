@@ -13,7 +13,7 @@ import 'general/widgets/my_scroll_behaviour.dart';
 import 'screens/onboarding/views/onborading.dart';
 
 
-//TODO xcode url for firebase
+//TODO add this via xcode url for firebase
 // com.googleusercontent.apps.364634384884-i9hr83qmaps5cl1s14gp55gokv5p74c9
 
 void main() async {
