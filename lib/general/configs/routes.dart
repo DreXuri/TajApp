@@ -28,12 +28,6 @@ Route? generateRoute(RouteSettings settings) {
         type: PageTransitionType.rightToLeft,
       );
 
-    //     case EditFarm.routeName:
-    // return PageTransition(
-    //     child: EditFarm(
-    //       farmModel: settings.arguments as FarmDetailModel,
-    //       farmId: settings.arguments as String,
-    //     ),
     case EditTask.route:
       return PageTransition(
         child: EditTask(
@@ -59,8 +53,12 @@ Route? generateRoute(RouteSettings settings) {
         type: PageTransitionType.rightToLeft,
       );
     case OtpPhoneScreen.route:
+      final arguments = settings.arguments as Map;
       return PageTransition(
-        child: const OtpPhoneScreen(),
+        child: OtpPhoneScreen(
+          phone: arguments['phone'],
+          smsId: arguments['smsId'],
+        ),
         type: PageTransitionType.rightToLeft,
       );
 
