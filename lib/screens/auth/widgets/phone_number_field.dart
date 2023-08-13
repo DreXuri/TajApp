@@ -5,16 +5,18 @@ import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
 import 'package:todoapp/general/widgets/constant.dart';
 
-
 class PhoneNumberField extends StatelessWidget {
   final TextEditingController controller;
-  const PhoneNumberField({Key? key, required this.controller}) : super(key: key);
+ 
+  const PhoneNumberField({Key? key, required this.controller,})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
       controller: controller,
       keyboardType: TextInputType.number,
+
       onCountryChanged: (value) {
         InputValidator.kCountryCode = '+${value.dialCode}';
       },
@@ -65,5 +67,3 @@ class PhoneNumberField extends StatelessWidget {
     );
   }
 }
-
-
