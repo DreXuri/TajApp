@@ -9,9 +9,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp/firebase_options.dart';
 import 'package:todoapp/general/configs/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:todoapp/general/models/user_model.dart';
+import 'package:todoapp/general/widgets/navbar.dart';
+import 'package:todoapp/screens/auth/controllers/user%20controller/user_provider.dart';
 import 'general/widgets/my_scroll_behaviour.dart';
 import 'screens/onboarding/views/onborading.dart';
-
 
 //TODO add this via xcode url for firebase
 // com.googleusercontent.apps.364634384884-i9hr83qmaps5cl1s14gp55gokv5p74c9
@@ -20,42 +22,34 @@ void main() async {
   _setupLoggin();
   WidgetsFlutterBinding.ensureInitialized();
 
-
-await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
- );
-
-
-
-
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
-    ProviderScope(
+    const ProviderScope(
       overrides: [
         // override the previous value with the new object
         // sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   static final defaultLightScheme =
       ColorScheme.fromSwatch(primarySwatch: Colors.yellow);
   static final defaultDarkScheme = ColorScheme.fromSwatch(
       brightness: Brightness.dark, primarySwatch: Colors.yellow);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(userProvider.notifier).refresh();
+    List<UserModel> users = ref.watch(userProvider);
+
     return ScreenUtilInit(
       useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
@@ -91,7 +85,8 @@ class _MyAppState extends State<MyApp> {
             return widget;
           },
           onGenerateRoute: (settings) => generateRoute(settings),
-          initialRoute: Onboarding.route,
+          initialRoute: users.isEmpty ? Onboarding.route : BottomBar.routeName,
+          // initialRoute: Onboarding.route,
         );
       }),
     );
