@@ -1,38 +1,28 @@
 // import 'dart:convert';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todoapp/general/params/params.dart';
 import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
-import 'package:todoapp/general/widgets/app_bar.dart';
 import 'package:todoapp/general/widgets/button.dart';
+import 'package:todoapp/general/widgets/custom_loading_indicator.dart';
 import 'package:todoapp/general/widgets/custom_snackbar.dart';
-import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
-import 'package:todoapp/general/widgets/inputs.dart';
-import 'package:todoapp/general/widgets/navbar.dart';
-import 'package:todoapp/screens/auth/controllers/registration/registration_controller.dart';
+import 'package:todoapp/screens/auth/controllers/auth%20controller/auth_controller.dart';
 import 'package:todoapp/screens/auth/views/otp_phone.dart';
 import 'package:todoapp/screens/auth/widgets/phone_number_field.dart';
-import 'package:todoapp/screens/home/views/homepage.dart';
 
-import '../../../general/widgets/custom_loading_indicator.dart';
-
-class Login extends StatefulWidget {
+class Login extends ConsumerStatefulWidget {
   const Login({Key? key}) : super(key: key);
   static const route = '/login';
   @override
-  State<Login> createState() => _LoginState();
+  ConsumerState<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends ConsumerState<Login> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
-  bool _passwordShow = false;
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -41,25 +31,23 @@ class _LoginState extends State<Login> {
     _textController.dispose();
   }
 
-sendcODE(){
-  if (phone.text.isEmpty) {
-    
+  sendcODE() {
+    if (_textController.text.isEmpty) {
+      return;
+    } else if (_textController.text.length < 8) {
+      return;
+    } else {
+      ref.read(authControllerProvider.notifier).sendyOtp(
+            context: context,
+            phone: '${InputValidator.kCountryCode}${_textController.text}',
+          );
+    }
   }
-}
-
-
-
-
-
-
-
-
-
-
-
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       body: Stack(
         children: [
@@ -99,18 +87,24 @@ sendcODE(){
                         HeightSpace(hight: 22.h),
                         PrimaryButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, BottomBar.routeName);
+                            sendcODE();
                           },
                           text: 'Get code',
                         ),
                         const HeightSpace(),
+                        // Consumer(builder: (_, WidgetRef ref, Widget? child) {
+                        //          final state = ref.watch(authControllerProvider);
+
+                        //   return
+                        //    _continueButton(ref);
+                        // }),
+
                         // Consumer(
                         //   builder: (_, WidgetRef ref, Widget? child) {
-                        //     final state = ref.watch(regControllerProvider);
+                        //     final state = ref.watch(authControllerProvider);
 
                         //     ref.listen(
-                        //       regControllerProvider,
+                        //       authControllerProvider,
                         //       (previous, next) {
                         //         next.when(
                         //           initial: () => null,
@@ -126,15 +120,13 @@ sendcODE(){
 
                         //     return state.when(
                         //       initial: () => _continueButton(ref),
-                        //       loading: () => const CustomLoadingIndicator(),
+                        //       loading: () => CustomLoadingIndicator(),
                         //       loaded: () => _continueButton(ref),
                         //       error: (value) => _continueButton(ref),
                         //     );
                         //   },
                         // ),
-                      
-                      
-                      
+
                         HeightSpace(hight: 149.h),
                       ],
                     ),
@@ -145,6 +137,9 @@ sendcODE(){
           ),
         ],
       ),
+   
+   
+   
     );
   }
 
@@ -153,17 +148,11 @@ sendcODE(){
   ) {
     return PrimaryButton(
       onPressed: () {
-        if (_loginFormKey.currentState!.validate()) {
-          ref.read(regControllerProvider.notifier).registerPhone(
-                RegistrationParams(
-                  email: '',
-                  phone:
-                      '${InputValidator.kCountryCode}${_textController.text}',
-                  verificationCode: '',
-                  firstName: '',
-                  lastName: '',
-                  password: '',
-                ),
+        if (_loginFormKey.currentState!.validate() &&
+            _textController.text.isNotEmpty) {
+          ref.read(authControllerProvider.notifier).sendyOtp(
+                context: context,
+                phone: '{${InputValidator.kCountryCode}${_textController.text}',
               );
 
           hideKeyboard(context);
@@ -172,14 +161,6 @@ sendcODE(){
       text: 'GetCode',
       backgroundColor: AppConst.kSecondaryYellow,
       borderColor: AppConst.kWhite,
-      // child: const CustomText(
-      //   fontSize: 16,
-      //   fontWeight: FontWeight.w400,
-      //   height: 1.3,
-      //   data: 'Get Code',
-      //   color: AppConst.kWhite,
-      //   textAlign: null,
-      // ),
     );
   }
 
@@ -188,8 +169,7 @@ sendcODE(){
       Navigator.of(buildContext).pushReplacementNamed(
         routeName,
         arguments: {
-          'phoneNumber':
-              '${InputValidator.kCountryCode}${_textController.text}',
+          'phone': '${InputValidator.kCountryCode}${_textController.text}',
         },
       );
     });
@@ -207,10 +187,4 @@ sendcODE(){
   void hideKeyboard(BuildContext context) {
     FocusScope.of(context).unfocus();
   }
-}
-
-void _onWidgetDidBuild(BuildContext buildContext, String routeName) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    Navigator.of(buildContext).pushReplacementNamed(routeName);
-  });
 }
