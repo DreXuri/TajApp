@@ -7,11 +7,9 @@ import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/utils/validator.dart';
 import 'package:todoapp/general/widgets/button.dart';
-import 'package:todoapp/general/widgets/custom_loading_indicator.dart';
 import 'package:todoapp/general/widgets/custom_snackbar.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
 import 'package:todoapp/screens/auth/controllers/auth%20controller/auth_controller.dart';
-import 'package:todoapp/screens/auth/views/otp_phone.dart';
 import 'package:todoapp/screens/auth/widgets/phone_number_field.dart';
 
 class Login extends ConsumerStatefulWidget {
