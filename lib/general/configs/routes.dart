@@ -8,6 +8,7 @@ import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/views/edit_task.dart';
 import 'package:todoapp/screens/home/views/homepage.dart';
 import 'package:todoapp/screens/home/views/profile.dart';
+import 'package:todoapp/screens/notifications/views/notification.dart';
 import 'package:todoapp/screens/onboarding/views/onborading.dart';
 
 Route? generateRoute(RouteSettings settings) {
@@ -59,6 +60,11 @@ Route? generateRoute(RouteSettings settings) {
           phone: arguments['phone'],
           smsId: arguments['smsId'],
         ),
+        type: PageTransitionType.rightToLeft,
+      );
+    case Notifications.route:
+      return PageTransition(
+        child: const Notifications(),
         type: PageTransitionType.rightToLeft,
       );
 
