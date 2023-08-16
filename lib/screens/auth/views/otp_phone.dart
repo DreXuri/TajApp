@@ -90,7 +90,7 @@ class OtpPhoneScreen extends ConsumerWidget {
                     return _verifyButton(context, ref, verificationCode);
                   },
                 ),
-
+                HeightSpace(hight: 24.h),
                 // Consumer(builder:
                 //     (BuildContext context, WidgetRef ref, Widget? child) {
                 //   return _verifyButton(context, ref, );
@@ -106,32 +106,32 @@ class OtpPhoneScreen extends ConsumerWidget {
                 //       hideKeyboard(context);
                 //     }),
 
-                PrimaryButton(
-                    text: 'Verify',
-                    onPressed: () {
-                      // isResendCode = false;
-                      //   if (_otpPhoneFormKey.currentState!.validate()) {
-                      //     ref.read(authControllerProvider.notifier).verifyOtCodep(
-                      //         context: context,
-                      //         smsId: smsId,
-                      //         // smsId: phoneNumber,
-                      //         smsCode: verificationCode,
-                      //         isMounted: true);
-                      //     hideKeyboard(context);
-                      //   }
-                      // },
-                      // print(verificationCode);
-                    }),
+                // PrimaryButton(
+                //     text: 'Verify',
+                //     onPressed: () {
+                //       // isResendCode = false;
+                //       //   if (_otpPhoneFormKey.currentState!.validate()) {
+                //       //     ref.read(authControllerProvider.notifier).verifyOtCodep(
+                //       //         context: context,
+                //       //         smsId: smsId,
+                //       //         // smsId: phoneNumber,
+                //       //         smsCode: verificationCode,
+                //       //         isMounted: true);
+                //       //     hideKeyboard(context);
+                //       //   }
+                //       // },
+                //       // print(verificationCode);
+                //     }),
                 HeightSpace(hight: 53.h),
 
                 const CustomText(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   height: 1.3,
-                  data: '''    By signing up, I agree to
-  Terms of Service & Privacy Policy.''',
+                  data:
+                      'By signing up, I agree to Terms of Service & Privacy Policy.',
                   color: AppConst.kTextBlack,
-                  textAlign: null,
+                  textAlign: TextAlign.center,
                 ),
                 // HeightSpace(hight: 22.h),
                 // Row(
@@ -176,7 +176,6 @@ class OtpPhoneScreen extends ConsumerWidget {
   ) {
     return PrimaryButton(
       text: 'Verify',
-      textColor: AppConst.kPrimaryRed,
       onPressed: () {
         ref.read(authControllerProvider.notifier).verifyOtCodep(
             context: context,
