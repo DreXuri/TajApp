@@ -4,6 +4,7 @@ import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/screens/home/views/add_tasks.dart';
 import 'package:todoapp/screens/home/views/homepage.dart';
 import 'package:todoapp/screens/home/views/profile.dart';
+import 'package:todoapp/screens/notifications/views/notification.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
@@ -21,7 +22,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const Homepage(),
     const AddTask(),
-    const Profile(),
+    const Notifications(),
   ];
 
   void updatePage(int page) {
