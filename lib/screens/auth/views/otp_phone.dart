@@ -6,210 +6,191 @@ import 'package:todoapp/general/params/params.dart';
 import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/app_bar.dart';
+import 'package:todoapp/general/widgets/background_widget.dart';
 import 'package:todoapp/general/widgets/button.dart';
+import 'package:todoapp/general/widgets/custom_loading_indicator.dart';
 import 'package:todoapp/general/widgets/custom_snackbar.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
 import 'package:todoapp/general/widgets/height_space.dart';
+import 'package:todoapp/general/widgets/navbar.dart';
+import 'package:todoapp/screens/auth/controllers/auth%20controller/auth_controller.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
 import 'package:todoapp/screens/auth/widgets/otp_box.dart';
 
-class OtpPhoneScreen extends StatefulWidget {
+class OtpPhoneScreen extends ConsumerWidget {
   static const String route = '/otp-phone-screen';
-  const OtpPhoneScreen({super.key});
+  const OtpPhoneScreen({super.key, required this.phone, required this.smsId});
+  final String phone;
+  final String smsId;
+  // String verificationCode = '';
+
+  // String phoneNumber = '';
+
+  void verifyOtp(BuildContext context, WidgetRef ref, String verificationCode) {
+    ref.read(authControllerProvider.notifier).verifyOtCodep(
+        context: context,
+        smsId: smsId,
+        smsCode: verificationCode,
+        isMounted: true);
+  }
 
   @override
-  State<OtpPhoneScreen> createState() => _OtpPhoneScreenState();
-}
+  // Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final arguments = ModalRoute.of(context)!.settings.arguments as Map;
 
-final _otpPhoneFormKey = GlobalKey<FormState>();
-
-class _OtpPhoneScreenState extends State<OtpPhoneScreen> {
-  String verificationCode = '';
-  String phoneNumber = '';
-
-  bool isResendCode = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as Map;
-
-    phoneNumber = arguments['phoneNumber'];
-
+    // phoneNumber = arguments['phone'];
+    // smsId = arguments['smsId'];
+    final _otpPhoneFormKey = GlobalKey<FormState>();
+    String verificationCode = '';
     return Scaffold(
-      backgroundColor: AppConst.kPrimary,
-      appBar: customAppBar(
-        context,
-        titleText: 'Verify Phone',
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          gradient: AppConst.appBarGradient,
-        ),
-        child: Stack(
-          children: [
-            Image.asset(
-              Assets.onboard,
-              width: double.infinity,
-            ),
-            SingleChildScrollView(
-              child: Form(
-                key: _otpPhoneFormKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    HeightSpace(hight: 103.h),
-                    _numberVerificationText(),
-                    HeightSpace(hight: 15.h),
-                    OtpBox(
-                      onCodeChanged: (code) {
-                        verificationCode = code;
-                      },
-                    ),
-                    HeightSpace(hight: 24.h),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Consumer(builder: (_, WidgetRef ref, Widget? child) {
-                    //       return InkWell(
-                    //         onTap: () => _resendCode(ref),
-                    //         child: RichTextWidget(
-                    //           data: 'Didn’t recieve code? ',
-                    //           titleFontSize: 12,
-                    //           titleTextColor: AppConst.kWhite,
-                    //           subTitle: 'Resend',
-                    //           titleFontWeight: FontWeight.normal,
-                    //           subTitleFontSize: 12,
-                    //           subTitleTextColor: AppConst.kSecondaryYellow,
-                    //         ),
-                    //       );
-                    //     }),
-                    //   ],
-                    // ),
-                    HeightSpace(hight: 24.h),
-                    // Consumer(
-                    //   builder:
-                    //       (BuildContext context, WidgetRef ref, Widget? child) {
-                    //     final state = ref.watch(regControllerProvider);
-
-                    //     ref.listen(
-                    //       regControllerProvider,
-                    //       (previous, next) {
-                    //         next.when(
-                    //             initial: () => null,
-                    //             loading: () => null,
-                    //             loaded: () => _onWidgetDidBuild(
-                    //                 context, RegisterEmailScreen.route),
-                    //             error: (message) => _showSnackBar(
-                    //                 context, message,
-                    //                 isError: true));
-                    //       },
-                    //     );
-
-                    //     return state.when(
-                    //       initial: () => _verifyButton(ref),
-                    //       loading: () => const CircularProgressIndicator(),
-                    //       loaded: () => _verifyButton(ref),
-                    //       error: (message) => _verifyButton(ref),
-                    //     );
-                    //   },
-                    // ),
-               
-                    HeightSpace(hight: 53.h),
-                    SvgPicture.asset(
-                      Assets.navHome,
-                      width: 93.w,
-                      height: 106.12.h,
-                    ),
-                    HeightSpace(hight: 50.h),
-                    const CustomText(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      height: 1.3,
-                      data: '''    By signing up, I agree to Scudo
-  Terms of Service & Privacy Policy.''',
-                      color: AppConst.kWhite,
-                      textAlign: null,
-                    ),
-                    HeightSpace(hight: 22.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CustomText(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          height: 1.3,
-                          data: '''Already have an account? ''',
-                          color: AppConst.kWhite,
-                          textAlign: null,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, Login.route);
-                          },
-                          child: const CustomText(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            height: 1.3,
-                            data: '''Login ''',
-                            color: AppConst.kSecondaryYellow,
-                            textAlign: null,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+      body: Background(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _otpPhoneFormKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                HeightSpace(hight: 18.h),
+                _numberVerificationText(),
+                HeightSpace(hight: 105.h),
+                OtpBox(
+                  onCodeChanged: (code) {
+                    verificationCode = code;
+                    // return verifyOtp(context, ref, code);
+                  },
                 ),
-              ),
+                HeightSpace(hight: 24.h),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Consumer(builder: (_, WidgetRef ref, Widget? child) {
+                //       return InkWell(
+                //         onTap: () => _resendCode(ref),
+                //         child: RichTextWidget(
+                //           data: 'Didn’t recieve code? ',
+                //           titleFontSize: 12,
+                //           titleTextColor: AppConst.kWhite,
+                //           subTitle: 'Resend',
+                //           titleFontWeight: FontWeight.normal,
+                //           subTitleFontSize: 12,
+                //           subTitleTextColor: AppConst.kSecondaryYellow,
+                //         ),
+                //       );
+                //     }),
+                //   ],
+                // ),
+                HeightSpace(hight: 24.h),
+                Consumer(
+                  builder:
+                      (BuildContext context, WidgetRef ref, Widget? child) {
+                    final state = ref.watch(authControllerProvider);
+
+                    return _verifyButton(context, ref, verificationCode);
+                  },
+                ),
+
+                // Consumer(builder:
+                //     (BuildContext context, WidgetRef ref, Widget? child) {
+                //   return _verifyButton(context, ref, );
+                // }),
+                // _verifyButton(
+                //   context,
+                //   ref,
+                // ),
+                // PrimaryButton(
+                //     text: 'Verify',
+                //     onPressed: () {
+                //       verifyOt;
+                //       hideKeyboard(context);
+                //     }),
+
+                PrimaryButton(
+                    text: 'Verify',
+                    onPressed: () {
+                      // isResendCode = false;
+                      //   if (_otpPhoneFormKey.currentState!.validate()) {
+                      //     ref.read(authControllerProvider.notifier).verifyOtCodep(
+                      //         context: context,
+                      //         smsId: smsId,
+                      //         // smsId: phoneNumber,
+                      //         smsCode: verificationCode,
+                      //         isMounted: true);
+                      //     hideKeyboard(context);
+                      //   }
+                      // },
+                      // print(verificationCode);
+                    }),
+                HeightSpace(hight: 53.h),
+
+                const CustomText(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  height: 1.3,
+                  data: '''    By signing up, I agree to
+  Terms of Service & Privacy Policy.''',
+                  color: AppConst.kTextBlack,
+                  textAlign: null,
+                ),
+                // HeightSpace(hight: 22.h),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     const CustomText(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //       height: 1.3,
+                //       data: '''Already have an account? ''',
+                //       color: AppConst.kWhite,
+                //       textAlign: null,
+                //     ),
+                //     TextButton(
+                //       onPressed: () {
+                //         Navigator.pushReplacementNamed(
+                //             context, Login.route);
+                //       },
+                //       child: const CustomText(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w400,
+                //         height: 1.3,
+                //         data: '''Login ''',
+                //         color: AppConst.kSecondaryYellow,
+                //         textAlign: null,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  // Widget _verifyButton(WidgetRef ref) {
-  //   return PrimaryButton(
-  //     text: 'Verify',
-  //     onPressed: () {
-  //       isResendCode = false;
-  //       if (_otpPhoneFormKey.currentState!.validate()) {
-  //         ref.read(regControllerProvider.notifier).verifyPhone(
-  //               RegistrationParams(
-  //                 phone: phoneNumber,
-  //                 verificationCode: verificationCode,
-  //               ),
-  //             );
-  //         hideKeyboard(context);
-  //       }
-  //     },
-  //   );
-  // }
-
-  // void _resendCode(WidgetRef ref) {
-  //   isResendCode = true;
-
-  //   ref.read(regControllerProvider.notifier).resendPhoneCode(
-  //         RegistrationParams(
-  //           phone: phoneNumber,
-  //           verificationCode: '',
-  //         ),
-  //       );
-  // }
-
-  void _onWidgetDidBuild(BuildContext buildContext, String routeName) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        if (isResendCode) return;
-
-        Navigator.of(context).pushReplacementNamed(routeName, arguments: {
-          'phoneNumber': phoneNumber,
-        });
+  Widget _verifyButton(
+    BuildContext context,
+    WidgetRef ref,
+    String verificationCode,
+  ) {
+    return PrimaryButton(
+      text: 'Verify',
+      textColor: AppConst.kPrimaryRed,
+      onPressed: () {
+        ref.read(authControllerProvider.notifier).verifyOtCodep(
+            context: context,
+            smsId: smsId,
+            // smsId: phoneNumber,
+            smsCode: verificationCode,
+            isMounted: true);
+        print(verificationCode);
+        hideKeyboard(context);
       },
     );
   }
 
+  // void _resendCode(WidgetRef ref) {
   void _showSnackBar(BuildContext context, String content,
       {bool isError = false}) {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -230,30 +211,30 @@ class _OtpPhoneScreenState extends State<OtpPhoneScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText(
-            fontSize: 16,
+          CustomText(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             height: 1.3,
-            data: '''We’ve sent an SMS with an activation code to ''',
-            color: AppConst.kWhite,
+            data: '''We’ve sent an SMS with an activation code to''',
+            color: AppConst.kTextBlack,
             textAlign: null,
           ),
           Row(
             children: [
-              const CustomText(
-                fontSize: 16,
+              CustomText(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 height: 1.3,
                 data: '''your phone ''',
-                color: AppConst.kWhite,
+                color: AppConst.kTextBlack,
                 textAlign: null,
               ),
               CustomText(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 height: 1.3,
-                data: phoneNumber,
-                color: AppConst.kSecondaryYellow,
+                data: phone,
+                color: AppConst.kPrimary,
                 textAlign: null,
               ),
             ],
@@ -262,4 +243,17 @@ class _OtpPhoneScreenState extends State<OtpPhoneScreen> {
       ),
     );
   }
+
+//   void _onWidgetDidBuild(BuildContext buildContext, String routeName) {
+//     WidgetsBinding.instance.addPostFrameCallback(
+//       (_) {
+//         if (isResendCode) return;
+
+//         Navigator.of(context).pushReplacementNamed(routeName, arguments: {
+//           'phoneNumber': phoneNumber,
+//         });
+//       },
+//     );
+//   }
+// }
 }
