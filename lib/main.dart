@@ -44,7 +44,7 @@ class MyApp extends ConsumerWidget {
   static final defaultLightScheme =
       ColorScheme.fromSwatch(primarySwatch: Colors.yellow);
   static final defaultDarkScheme = ColorScheme.fromSwatch(
-      brightness: Brightness.dark, primarySwatch: Colors.yellow);
+      brightness: Brightness.dark, primarySwatch: Colors.amber);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(userProvider.notifier).refresh();
@@ -60,7 +60,6 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           title: 'TodoApp',
           theme: ThemeData(
-            // scaffoldBackgroundColor: AppConst.kBlack,
             textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
                 .apply(fontSizeFactor: 1.sp),
             visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -68,7 +67,6 @@ class MyApp extends ConsumerWidget {
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
-            // scaffoldBackgroundColor: AppConst.kBlack,
             textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
                 .apply(fontSizeFactor: 1.sp),
             visualDensity: VisualDensity.adaptivePlatformDensity,
