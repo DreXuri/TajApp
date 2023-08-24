@@ -8,14 +8,14 @@ import 'package:todoapp/screens/auth/views/otp_phone.dart';
 
 final authRepositoryProvider = Provider((ref) {
   return AuthRepisotory(auth: FirebaseAuth.instance);
-});   
+});
 
 class AuthRepisotory {
-  final FirebaseAuth auth;
-
   AuthRepisotory({
     required this.auth,
   });
+
+  final FirebaseAuth auth;
 
   verifyOtp({
     required BuildContext context,
@@ -34,10 +34,8 @@ class AuthRepisotory {
         return;
       }
       Navigator.of(context).pushNamed(BottomBar.routeName);
-// Navigator.pushReplacement(context, const BottomBar.);
     } on FirebaseAuth catch (e) {
       debugPrint(e.toString());
-
       showCustomSnackBarAfterFrame(context, e.toString(), isError: true);
     }
   }
@@ -54,20 +52,26 @@ class AuthRepisotory {
           },
           verificationFailed: (e) {
             debugPrint(e.toString());
-
-            showCustomSnackBarAfterFrame(context, e.toString(), isError: true);
+            showCustomSnackBarAfterFrame(
+              context,
+              e.toString(),
+              // isError: false,
+              isError: true,
+            );
           },
           codeSent: (smsId, resendCodeId) {
             DBHeler.createUser(1);
+            // Navigator.of(context).pushNamedAndRemoveUntil(
+            //     OtpPhoneScreen.route, (route) => false,
+            //     arguments: {'phone': phone, 'smsId': smsId});
             Navigator.of(context).pushNamed(OtpPhoneScreen.route,
-                arguments: {' phone': phone, 'smsId': smsId});
+                arguments: {'phone': phone, 'smsId': smsId});
+            // Navigator.of(context).pushReplacementNamed(OtpPhoneScreen.route,
+            //     arguments: {'phone': phone, 'smsId': smsId});
           },
-          codeAutoRetrievalTimeout: (smsId) {});
-
-      // await auth.signInWithCredential(credential);
+          codeAutoRetrievalTimeout: (String smsId) {});
     } on FirebaseAuth catch (e) {
       debugPrint(e.toString());
-
       showCustomSnackBarAfterFrame(context, e.toString(), isError: true);
     }
   }
