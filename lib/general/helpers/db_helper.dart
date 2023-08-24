@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:sqflite/sqflite.dart';
 import 'package:todoapp/screens/home/model/task_model.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'dart:async';
+
+// import '../models/user_model.dart';
 
 class DBHeler {
   static Future<void> createTables(sql.Database database) async {
@@ -22,10 +23,8 @@ class DBHeler {
   }
 
   static Future<sql.Database> db() async {
-    return sql.openDatabase('drus', version: 1, onCreate: (
-      sql.Database database,
-      int version,
-    ) async {
+    return sql.openDatabase('drus', version: 1,
+        onCreate: (sql.Database database, int version) async {
       await createTables(database);
     });
   }
@@ -39,15 +38,19 @@ class DBHeler {
 
   static Future<int> createUser(int isVerified) async {
     final db = await DBHeler.db();
-
     final data = {
       'id': 1,
       'isVerified': isVerified,
     };
-
     final id = await db.insert('user', data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
+  }
+
+  // to get user
+  static Future<List<Map<String, dynamic>>> getUsers() async {
+    final db = await DBHeler.db();
+    return db.query('user', orderBy: 'id');
   }
 
   ///grt all item
@@ -62,10 +65,7 @@ class DBHeler {
     return db.query('todos', where: 'id =?', whereArgs: [id], limit: 1);
   }
 
-  static Future<List<Map<String, dynamic>>> getUsers() async {
-    final db = await DBHeler.db();
-    return db.query('user', orderBy: 'id');
-  }
+
 
   static Future<int> updateItem(
     int id,
@@ -86,7 +86,8 @@ class DBHeler {
       'updatedAt': updatedAt
     };
     final result =
-        await db.update('todos', data, where: 'id =?', whereArgs: [id]);
+        await db.update('todos', data,
+         where: 'id =?', whereArgs: [id]);
     return result;
   }
 

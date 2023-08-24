@@ -61,6 +61,7 @@ class AuthRepisotory {
           },
           codeSent: (smsId, resendCodeId) {
             DBHeler.createUser(1);
+            // DBHeler.createUser(1);
             // Navigator.of(context).pushNamedAndRemoveUntil(
             //     OtpPhoneScreen.route, (route) => false,
             //     arguments: {'phone': phone, 'smsId': smsId});

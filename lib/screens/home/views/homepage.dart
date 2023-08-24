@@ -126,101 +126,96 @@ class _HomepageState extends ConsumerState<Homepage>
           )
         ],
       ),
-      body: Background(
-        child: ListView(
-          children: [
-            Row(
-              children: [
-                Icon(Ionicons.alarm_sharp,
-                    size: 20.h, color: AppConst.kPrimary),
-                const WidthSpace(),
-                CustomText(
-                  data: '''Today's Task''',
-                  textAlign: TextAlign.center,
-                  color: AppConst.kBlack,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
+      body: ListView(
+        children: [
+          Row(
+            children: [
+              Icon(Ionicons.alarm_sharp, size: 20.h, color: AppConst.kPrimary),
+              const WidthSpace(),
+              CustomText(
+                data: '''Today's Task''',
+                textAlign: TextAlign.center,
+                color: AppConst.kBlack,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ],
+          ),
+          const HeightSpace(),
+          Container(
+            decoration: BoxDecoration(
+                color: AppConst.kBlack,
+                borderRadius: BorderRadius.all(Radius.circular(10.r))),
+            child: TabBar(
+              controller: _tabController,
+              labelPadding: EdgeInsets.zero,
+              isScrollable: false,
+              unselectedLabelColor: AppConst.kActiveColor,
+              labelColor: AppConst.kWhite,
+              indicatorColor: AppConst.kWhite,
+              tabs: _tabs(),
             ),
-            const HeightSpace(),
-            Container(
-              decoration: BoxDecoration(
-                  color: AppConst.kBlack,
-                  borderRadius: BorderRadius.all(Radius.circular(10.r))),
-              child: TabBar(
+          ),
+          const HeightSpace(),
+          SizedBox(
+            height: AppConst.kHeight * 0.3,
+            width: AppConst.kWidth,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+              child: TabBarView(
                 controller: _tabController,
-                labelPadding: EdgeInsets.zero,
-                isScrollable: false,
-                unselectedLabelColor: AppConst.kActiveColor,
-                labelColor: AppConst.kWhite,
-                indicatorColor: AppConst.kWhite,
-                tabs: _tabs(),
-              ),
-            ),
-            const HeightSpace(),
-            SizedBox(
-              height: AppConst.kHeight * 0.3,
-              width: AppConst.kWidth,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    Container(
-                      color: AppConst.kBlack,
+                children: [
+                  Container(
+                    color: AppConst.kBlack,
+                    height: AppConst.kHeight * 0.3,
+                    child: const TodayTask(),
+                  ),
+                  Container(
+                      color: AppConst.kWhite,
                       height: AppConst.kHeight * 0.3,
-                      child: const TodayTask(),
-                    ),
-                    Container(
-                        color: AppConst.kWhite,
-                        height: AppConst.kHeight * 0.3,
-                        child: const CompletedTask()),
-                  ],
-                ),
+                      child: const CompletedTask()),
+                ],
               ),
             ),
-            const HeightSpace(),
-            const TomaoList(),
-            HeightSpace(hight: 17.h),
-            ExpandWidget(
-              text: DateTime.now()
-                  .add(Duration(days: 2))
-                  .toString()
-                  .substring(5, 10),
-              subText: '''Task for future''',
-              // trailing: Icon(Ionicons.time_outline),
-              //  trailing: Icon(Ionicons.alarm_sharp),
-              trailing: Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: ref.watch(expansionStateTrueProvider)
-                    ? const Icon(
-                        AntDesign.closecircle,
-                        color: AppConst.kLightGray,
-                      )
-                    : const Icon(
-                        AntDesign.circledown,
-                        color: AppConst.kGreen,
-                      ),
+          ),
+          const HeightSpace(),
+          const TomaoList(),
+          HeightSpace(hight: 17.h),
+          ExpandWidget(
+            text: DateTime.now()
+                .add(Duration(days: 2))
+                .toString()
+                .substring(5, 10),
+            subText: '''Task for future''',
+            // trailing: Icon(Ionicons.time_outline),
+            //  trailing: Icon(Ionicons.alarm_sharp),
+            trailing: Padding(
+              padding: EdgeInsets.only(top: 20.h),
+              child: ref.watch(expansionStateTrueProvider)
+                  ? const Icon(
+                      AntDesign.closecircle,
+                      color: AppConst.kLightGray,
+                    )
+                  : const Icon(
+                      AntDesign.circledown,
+                      color: AppConst.kGreen,
+                    ),
+            ),
+            // trailing: const Icon(Ionicons.time_outline),
+            isEpand: (bool expanded) {
+              ref.read(expansionStateTrueProvider.notifier).setStart(expanded);
+            },
+            children: [
+              PlanTiles(
+                start: '04: 45',
+                end: '06:33',
+                // switcher: Icon(Icons.done_all_outlined),
+                // Switch(value: true, onChanged: (value) {}),
+                switcher: Switch(value: true, onChanged: (value) {}),
               ),
-              // trailing: const Icon(Ionicons.time_outline),
-              isEpand: (bool expanded) {
-                ref
-                    .read(expansionStateTrueProvider.notifier)
-                    .setStart(expanded);
-              },
-              children: [
-                PlanTiles(
-                  start: '04: 45',
-                  end: '06:33',
-                  // switcher: Icon(Icons.done_all_outlined),
-                  // Switch(value: true, onChanged: (value) {}),
-                  switcher: Switch(value: true, onChanged: (value) {}),
-                ),
-              ],
-            )
-          ],
-        ),
+            ],
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

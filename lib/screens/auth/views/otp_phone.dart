@@ -85,7 +85,7 @@ class OtpPhoneScreen extends ConsumerWidget {
                 Consumer(
                   builder:
                       (BuildContext context, WidgetRef ref, Widget? child) {
-                    final state = ref.watch(authControllerProvider);
+                    // final state = ref.watch(authControllerProvider);
 
                     return _verifyButton(context, ref, verificationCode);
                   },
@@ -183,7 +183,6 @@ class OtpPhoneScreen extends ConsumerWidget {
             // smsId: phoneNumber,
             smsCode: verificationCode,
             isMounted: true);
-        print(verificationCode);
         hideKeyboard(context);
       },
     );
