@@ -23,6 +23,7 @@ class CompletedTask extends ConsumerWidget {
               lastMonth.contains(element.date.substring(0, 10)),
         )
         .toList();
+        
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
