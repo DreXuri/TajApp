@@ -198,8 +198,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                         repeat: 'yes',
                       );
                       ref.read(homeStateProvider.notifier).addItem(task);
-                      ref
-                          .read(timeStartStateProvider.notifier)
+                      ref.read(timeStartStateProvider.notifier)
                           .setStartTime('');
                       ref.read(timeEndStateProvider.notifier).setEndDate('');
                       ref.read(dateStateProvider.notifier).setDate('');
