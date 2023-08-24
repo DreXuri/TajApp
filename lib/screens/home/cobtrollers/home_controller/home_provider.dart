@@ -7,6 +7,7 @@ import 'package:todoapp/screens/home/model/task_model.dart';
 
 part 'home_provider.g.dart';
 
+
 @riverpod
 class HomeState extends _$HomeState {
   @override

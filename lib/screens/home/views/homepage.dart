@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todoapp/general/helpers/notification_heper.dart';
 import 'package:todoapp/general/utils/assets_constant.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/background_widget.dart';
@@ -33,6 +34,8 @@ class _HomepageState extends ConsumerState<Homepage>
   final TextEditingController _searchController = TextEditingController();
   late final TabController _tabController;
   int selectedIndex = 0;
+  late NotificationHelper notifierHelper;
+  late NotificationHelper controller;
 
   @override
   void initState() {
@@ -40,6 +43,10 @@ class _HomepageState extends ConsumerState<Homepage>
     _tabController = new TabController(vsync: this, length: 2);
     _tabController.addListener(() {
       this.selectedIndex = _tabController.index;
+    });
+    notifierHelper = NotificationHelper(ref: ref);
+    Future.delayed(const Duration(seconds: 0), () {
+      controller = NotificationHelper(ref: ref);
     });
   }
 
