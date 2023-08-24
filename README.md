@@ -9,6 +9,7 @@ to login you can use otp 291468
 
 ![sms](https://github.com/DreXuri/TajApp/assets/80977358/810514ff-b610-4f26-9457-1379d5dcd00e)
 
-![home](https://github.com/DreXuri/TajApp/assets/80977358/300fac3d-620b-4eb4-a311-08edc8b68440)
+![dashboard](https://github.com/DreXuri/TajApp/assets/80977358/7d243b61-987d-4da6-928a-cbb4dc8872e9)
+
 
 
