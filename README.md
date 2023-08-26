@@ -1,7 +1,7 @@
 trackapp
 
 A Flutter project that  helps to track your plan with push notification and firebase authenticationa.
-to login you can use otp 291468
+use 08064230123 to login and use otp 291468
 
 
 
