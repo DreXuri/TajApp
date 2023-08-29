@@ -5,9 +5,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:todoapp/general/utils/color_constant.dart';
 import 'package:todoapp/general/widgets/button.dart';
 import 'package:todoapp/general/widgets/custome_text.dart';
-import 'package:todoapp/general/widgets/width_space.dart';
 import 'package:todoapp/screens/onboarding/widgets/page_two.dart';
 import 'package:todoapp/screens/onboarding/widgets/pageone.dart';
+
+import '../widgets/page_three.dart';
 
 class Onboarding extends StatefulWidget {
   static const String route = '/onboard_one_screen';
@@ -30,6 +31,7 @@ class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConst.kBackground,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -39,6 +41,7 @@ class _OnboardingState extends State<Onboarding> {
             children: const [
               PageOne(),
               PageTwo(),
+              PageThree(),
             ],
           ),
           Align(
@@ -68,6 +71,25 @@ class _OnboardingState extends State<Onboarding> {
                         ],
                       ),
                     ),
+                    SecondaryButton(
+                      onPressed: () {
+                        pageController.jumpToPage(3
+                            // duration: const Duration(milliseconds: 600),
+                            // curve: Curves.easeInCirc,
+                            );
+                      },
+                      child: Row(
+                        children: [
+                          Icon(Ionicons.chevron_forward_circle,
+                              size: 30.h, color: AppConst.kPrimary),
+                          const CustomText(
+                            data: 'last',
+                            textAlign: TextAlign.start,
+                            color: AppConst.kPrimary,
+                          ),
+                        ],
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         pageController.nextPage(
@@ -76,7 +98,7 @@ class _OnboardingState extends State<Onboarding> {
                       },
                       child: SmoothPageIndicator(
                           controller: pageController,
-                          count: 2,
+                          count: 3,
                           effect: ExpandingDotsEffect(
                             dotHeight: 6.h,
                             dotWidth: 6.h,
@@ -91,8 +113,6 @@ class _OnboardingState extends State<Onboarding> {
           ),
         ],
       ),
-  
-  
     );
   }
 }

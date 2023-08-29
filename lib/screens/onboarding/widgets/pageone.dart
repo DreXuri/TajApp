@@ -13,6 +13,7 @@ class PageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConst.kBackground,
       body: Container(
         height: AppConst.kHeight,
         width: AppConst.kWidth,
@@ -69,5 +70,4 @@ class PageOne extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -6,15 +6,15 @@ import 'package:todoapp/general/widgets/button.dart';
 import 'package:todoapp/screens/auth/views/login.dart';
 import 'package:todoapp/screens/onboarding/widgets/background.dart';
 
-class PageTwo extends StatelessWidget {
-  static const String route = '/onboard_one_screen';
+class PageThree extends StatelessWidget {
+  static const String route = '/onboard_three_screen';
 
-  const PageTwo({super.key});
+  const PageThree({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConst.kBackground,
+      backgroundColor: AppConst.kWhite,
       body: Container(
         height: AppConst.kHeight,
         width: AppConst.kWidth,
@@ -23,12 +23,12 @@ class PageTwo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.w),
-              child: Image.asset(
-                Assets.onboard,
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 40.w),
+            //   child: Image.asset(
+            //     Assets.onboard,
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.only(top: 163.h),
               child: PrimaryButton(
@@ -41,7 +41,7 @@ class PageTwo extends StatelessWidget {
                   );
                 },
                 hasOuterPadding: true,
-                text: 'Login with your Phone number',
+                text: 'PAGE Three',
                 borderColor: AppConst.kWhite,
               ),
             )
