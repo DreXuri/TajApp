@@ -20,6 +20,8 @@ class PrimaryButton extends StatelessWidget {
     this.hasOuterPadding = true,
     this.borderColor,
     this.borderRadius,
+    this.width,
+    this.height,
   });
 
   final VoidCallback onPressed;
@@ -34,6 +36,8 @@ class PrimaryButton extends StatelessWidget {
   final bool hasOuterPadding;
   final Color? borderColor;
   final double? borderRadius;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +45,49 @@ class PrimaryButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: hasOuterPadding ? 20.0.w : 0,
       ),
-      child: ElevatedButton(
-        onPressed: enabled ? onPressed : null,
-        style: buttonStyle ??
-            ElevatedButton.styleFrom(
-              backgroundColor: backgroundColor ?? AppConst.kPrimary,
-              disabledForegroundColor: AppConst.kPrimary.withOpacity(0.56),
-              disabledBackgroundColor:
-                  AppConst.kListItemBackgroundColor.withOpacity(0.38),
-              padding: padding ??
-                  EdgeInsets.symmetric(
-                      vertical: child != null ? 10.h : 12.h, horizontal: 28.w),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: borderColor ?? Colors.transparent,
-                ),
-                borderRadius: BorderRadius.circular(
-                  borderRadius ?? 10.r,
-                ),
-              ),
+      child: Container(
+        height: height ?? 45.h,
+        width: width ?? 300.w,
+
+        decoration: BoxDecoration(
+          color: backgroundColor ?? Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade500,
+              offset: Offset(6, 6),
+              blurRadius: 15,
+              spreadRadius: 1,
             ),
+            BoxShadow(
+              color: AppConst.kWhite,
+              offset: Offset(-6, -6),
+              blurRadius: 15,
+              spreadRadius: 1,
+            )
+          ],
+        ),
+        // onPressed: enabled ? onPressed : null,
+        // style: buttonStyle ??
+        // ElevatedButton.styleFrom(
+        //   backgroundColor: backgroundColor ?? AppConst.kPrimary,
+        //   disabledForegroundColor: AppConst.kPrimary.withOpacity(0.56),
+        //   disabledBackgroundColor:
+        //       AppConst.kListItemBackgroundColor.withOpacity(0.38),
+        //   padding: padding ??
+        //       EdgeInsets.symmetric(
+        //           vertical: child != null ? 10.h : 12.h, horizontal: 28.w),
+        //   shape: RoundedRectangleBorder(
+        //     side: BorderSide(
+        //       color: borderColor ?? Colors.transparent,
+        //     ),
+        //     borderRadius: BorderRadius.circular(
+        //       borderRadius ?? 10.r,
+        //     ),
+
+        //   ),
+
+        // ),
         child: Align(
           alignment: Alignment.center,
           child: Center(
