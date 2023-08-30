@@ -43,10 +43,9 @@ class _LoginState extends ConsumerState<Login> {
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConst.kWhite,
       body: Stack(
         children: [
           Padding(
@@ -135,9 +134,6 @@ class _LoginState extends ConsumerState<Login> {
           ),
         ],
       ),
-   
-   
-   
     );
   }
 
