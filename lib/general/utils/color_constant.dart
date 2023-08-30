@@ -35,7 +35,8 @@ class AppConst {
   static const Color kInactiveColor = kPrimary;
   static const Color kActiveColor = Color(0xFF8E8E93);
   static const Color kScrollGrey = Color(0xFF898A8D);
-  static const Color kBackground = Color(0xFFEBECEE);
+  // static const Color kBackground = Color(0xFFEBECEE);
+  static Color kBackground = Colors.grey.shade300;
   static const Color kPrimaryRed = Color(0xFFF91414);
   static const Color kDivider = Color(0xFFE7E7E7);
   static const Color kFillColor = Color(0xFFF3F2F5);
