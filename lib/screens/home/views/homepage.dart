@@ -40,7 +40,7 @@ class _HomepageState extends ConsumerState<Homepage>
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(vsync: this, length: 2);
+    _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(() {
       this.selectedIndex = _tabController.index;
     });
@@ -128,7 +128,6 @@ class _HomepageState extends ConsumerState<Homepage>
         ],
       ),
       body: Background(
-        // padding: EdgeInsets.symmetric(horizontal: 15.0.h),
         child: ListView(
           children: [
             Row(
