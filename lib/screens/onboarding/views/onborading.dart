@@ -47,7 +47,7 @@ class _OnboardingState extends State<Onboarding> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 30.w),
+              padding: EdgeInsets.symmetric(horizontal: 23.h, vertical: 30.w),
               child: SizedBox(
                 height: 40.h,
                 child: Row(
