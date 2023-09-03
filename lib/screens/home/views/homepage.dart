@@ -45,7 +45,7 @@ class _HomepageState extends ConsumerState<Homepage>
       this.selectedIndex = _tabController.index;
     });
     notifierHelper = NotificationHelper(ref: ref);
-    Future.delayed(const Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 1), () {
       controller = NotificationHelper(ref: ref);
     });
   }
