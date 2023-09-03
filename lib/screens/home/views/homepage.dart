@@ -65,7 +65,7 @@ class _HomepageState extends ConsumerState<Homepage>
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(60.h),
+            preferredSize: Size.fromHeight(62.h),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 10.w),
               child: SearchField(
@@ -78,7 +78,7 @@ class _HomepageState extends ConsumerState<Homepage>
               ),
             )),
         elevation: 0,
-        toolbarHeight: 80.h,
+        toolbarHeight: 81.h,
         backgroundColor: Colors.transparent,
         toolbarOpacity: 0.8,
         title: const CustomText(
@@ -90,7 +90,7 @@ class _HomepageState extends ConsumerState<Homepage>
         leading: const Icon(
           Icons.crop_free_sharp,
           color: AppConst.kBlack,
-          size: 30,
+          size: 29,
         ),
         actions: [
           Row(
